@@ -13,7 +13,7 @@ class NavBar extends React.Component {
     return (
         <Menu borderless className="topmenu">
           <Container>
-            <Menu.Item><Image src=""/></Menu.Item>
+            <Menu.Item><Image size='tiny' circular src="/images/meteor-logo.png"/></Menu.Item>
             <Menu.Item position="right">Home</Menu.Item>
             <Menu.Item>View</Menu.Item>
             <Menu.Item>Reports</Menu.Item>
