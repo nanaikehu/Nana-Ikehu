@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
-import { Menu, Dropdown, Container, Image, Icon } from 'semantic-ui-react';
+import { Menu, Container, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
