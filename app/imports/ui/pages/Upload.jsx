@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-<<<<<<< HEAD
+
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
 
