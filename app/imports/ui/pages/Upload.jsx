@@ -3,9 +3,7 @@ import { Grid } from 'semantic-ui-react';
 <<<<<<< HEAD
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
-=======
 
->>>>>>> f1c5644fdf2daa3a453089e89c12108bb737fbac
 
 /** A simple static component to render some text for the landing page. */
 class Upload extends React.Component {
