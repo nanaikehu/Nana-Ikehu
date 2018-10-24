@@ -17,7 +17,8 @@
     "semantic-ui-react": "^0.82.5",
     "simpl-schema": "^1.4.2",
     "uniforms": "^1.25.0",
-    "uniforms-semantic": "^1.25.0"
+    "uniforms-semantic": "^1.25.0",
+    "victory": "^30.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
