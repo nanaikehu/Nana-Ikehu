@@ -2,25 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter } from 'react-router-dom';
-import { Menu, Container, Image } from 'semantic-ui-react';
+import { withRouter, NavLink } from 'react-router-dom';
+import { Menu, Dropdown, Header, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import Upload from '../pages/Upload';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
     return (
-        <Menu borderless className="topmenu">
-          <Container>
-            <Menu.Item><Image size='tiny' circular src="/images/meteor-logo.png"/></Menu.Item>
-            <Menu.Item position="right">Home</Menu.Item>
-            <Menu.Item>View</Menu.Item>
-            <Menu.Item>Reports</Menu.Item>
-            <Menu.Item>Events</Menu.Item>
-            <Menu.Item>Maps</Menu.Item>
-            <Menu.Item>Settings</Menu.Item>
-          </Container>
+        <Menu style={menuStyle} attached="top" borderless inverted color={'blue'}>
+          <Menu.Item><Image size='tiny' circular src="/images/meteor-logo.png"/></Menu.Item>
+          <Menu.Item as={NavLink} activeClassName="" exact to="/">
+            <Header inverted as='h1'>Nana Ikehu</Header>
+          </Menu.Item>
+          <Menu.Item position="right" as={NavLink} activeClassName="active" exact to="/upload" key='upload'>Upload</Menu.Item>,
         </Menu>
     );
   }
