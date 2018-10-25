@@ -7,7 +7,6 @@ import { _ } from 'meteor/underscore'
 
 /** A simple static component to render some text for the landing page. */
 class Upload extends React.Component {
-  /** Initialize component state with properties for login and redirection. */
   constructor(props) {
     super(props);
     this.csvParsed = {};
@@ -30,7 +29,8 @@ class Upload extends React.Component {
       var element = document.getElementById('file-content');
       element.textContent = contents;
       this.csvParsed = Papa.parse(contents, { header: true }).data;
-      this.keys = _.keys(csvArray[0]);
+      this.keys = _.keys(this.csvParsed);
+      console.log(this.csvParsed);
     };
     reader.readAsText(file);
   }
