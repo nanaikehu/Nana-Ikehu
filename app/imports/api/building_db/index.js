@@ -3,6 +3,7 @@ import Papa from 'papaparse';
 import { _ } from 'meteor/underscore';
 
 
+
 const Buildings = new Mongo.Collection('buildings');
 
 
@@ -32,6 +33,28 @@ if(Meteor.isServer) {
   })
 
 }
+const sample = new Mongo.Collection('sample');
 
-console.log(Buildings.find())
-export default Buildings;
+
+if(Meteor.isServer) {
+  sample.rawCollection().drop();
+// assets/app here is analagous to your /private directory in the root of your app. This is where Meteor ultimately
+// stores the contents of /private in a built app.
+  const text = fs.readFileSync('assets/app/files/engmain.csv', 'utf8');
+  const sample_raw = Papa.parse(text);
+
+  sample_raw.data.shift(); //remove header
+
+  _.each(sample_raw.data, item => {
+    let array = _.values(item);
+    let data_insert = {
+      date: new Date(array[0]),
+      kw: array[1]
+    }
+    sample.insert(data_insert);
+
+  })
+
+}
+
+export default sample;

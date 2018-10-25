@@ -3,7 +3,7 @@ import { Grid } from 'semantic-ui-react';
 
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
-import Buildings from '../../api/building_db';
+import sample from '/imports/api/building_db';
 
 
 /** A simple static component to render some text for the landing page. */
@@ -20,7 +20,7 @@ class Upload extends React.Component {
   }
 
   readSingleFile(e) {
-    console.log(Buildings.find().fetch());
+    console.log(sample.find().fetch());
     let file = e.target.files[0];
     if (!file) {
       return;
