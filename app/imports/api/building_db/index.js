@@ -22,7 +22,8 @@ if(Meteor.isServer) {
       sqft: array[2],
       floors: array[3],
       rooms: array[4],
-      export_labels: []
+      meters : [],
+      csvLabels : []
 
     }
     Buildings.insert(data_insert);
@@ -31,4 +32,4 @@ if(Meteor.isServer) {
 
 }
 
-console.log(Buildings.find())
+//console.log(Buildings.find())
