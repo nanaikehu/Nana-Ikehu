@@ -20,9 +20,10 @@ class Graph1 extends React.Component {
   render() {
     const style={fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white'};
     return (
-        <Card style={style} raised={true} color={'blue'}>
+        <Card style={style} raised={true} color={'red'}>
           <Card.Content>
             <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
+            <hr/>
           </Card.Content>
           <Card.Content>
             <svg viewBox="0 0 400 400">
