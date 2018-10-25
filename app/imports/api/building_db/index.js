@@ -7,6 +7,7 @@ const Buildings = new Mongo.Collection('buildings');
 
 
 if(Meteor.isServer) {
+  Buildings.rawCollection().drop();
 // assets/app here is analagous to your /private directory in the root of your app. This is where Meteor ultimately
 // stores the contents of /private in a built app.
   const text = fs.readFileSync('assets/app/files/BuildingList.csv', 'utf8');
@@ -32,4 +33,5 @@ if(Meteor.isServer) {
 
 }
 
-//console.log(Buildings.find())
+console.log(Buildings.find())
+export default Buildings;
