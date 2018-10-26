@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
 import sample from '/imports/api/building_db';
@@ -38,7 +37,7 @@ class Upload extends React.Component {
   }
 
   promptHeaders() {
-  //This should prompt the user with this.keys to select the building and the date
+    //This should prompt the user with this.keys to select the building and the date
   }
 
   render() {
