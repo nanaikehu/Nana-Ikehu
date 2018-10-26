@@ -1,14 +1,5 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-
-
-/** A simple static component to render some text for the landing page. */
-class Upload extends React.Component {
-
-
-  readSingleFile(e) {
-    var file = e.target.files[0];
-=======
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
 
@@ -29,35 +20,23 @@ class Upload extends React.Component {
 
   readSingleFile(e) {
     let file = e.target.files[0];
->>>>>>> origin/ross
     if (!file) {
       return;
     }
     var reader = new FileReader();
-<<<<<<< HEAD
-    reader.onload = function(e) {
-      var contents = e.target.result;
-      var element = document.getElementById('file-content');
-      element.textContent = contents;
-=======
     reader.onload = function (e) {
       var contents = e.target.result;
       var element = document.getElementById('file-content');
       element.textContent = contents;
       this.csvParsed = Papa.parse(contents, { header: true }).data;
       this.keys = _.keys(csvArray[0]);
->>>>>>> origin/ross
     };
     reader.readAsText(file);
   }
 
-<<<<<<< HEAD
-
-=======
   promptHeaders() {
-  //This should prompt the user with this.keys to select the building and the date
+    //This should prompt the user with this.keys to select the building and the date
   }
->>>>>>> origin/ross
 
   render() {
     return (
@@ -65,17 +44,10 @@ class Upload extends React.Component {
 
           <Grid.Row>
             <input type="file" id="file-input" onChange={this.readSingleFile}/>
-<<<<<<< HEAD
-            <h3>Contents of the file:</h3>
-            <pre id="file-content"></pre>
-          </Grid.Row>
-
-=======
           </Grid.Row>
           <Grid.Row>
             <pre id="file-content"></pre>
           </Grid.Row>
->>>>>>> origin/ross
         </Grid>
     );
   }
