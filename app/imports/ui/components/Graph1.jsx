@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { VictoryPie } from 'victory';
+import {sampledata} from '../../../data_raw/data.js'
 
 const data = [
   {x: 1, y: 13000},
@@ -18,6 +19,7 @@ const getPercent = (num) => {
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class Graph1 extends React.Component {
   render() {
+    console.log(sampledata[0]);
     const style={fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white'};
     return (
         <Card style={style} raised={true} color={'red'}>
