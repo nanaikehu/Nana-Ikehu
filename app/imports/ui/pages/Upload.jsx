@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
-import sample from '/imports/api/building_db';
+
 
 
 /** A simple static component to render some text for the landing page. */
@@ -48,7 +48,7 @@ class Upload extends React.Component {
             <input type="file" id="file-input" onChange={this.readSingleFile}/>
           </Grid.Row>
           <Grid.Row>
-            <pre id="file-content"></pre>
+            <pre id="file-content">{sample.find().fetch()}</pre>
           </Grid.Row>
         </Grid>
     );

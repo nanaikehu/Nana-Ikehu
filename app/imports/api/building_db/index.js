@@ -5,7 +5,7 @@ import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 
 
-const Buildings = new Mongo.Collection('Buildings');
+Buildings = new Mongo.Collection('Buildings');
 
 
 if (Meteor.isServer) {
@@ -34,7 +34,7 @@ if (Meteor.isServer) {
   });
 
 }
-const sample = new Mongo.Collection('sample');
+sample = new Mongo.Collection('sample');
 
 
 if (Meteor.isServer) {
@@ -58,6 +58,6 @@ if (Meteor.isServer) {
 
 }
 
-console.log(Buildings.find());
+
 
 export { Buildings, sample };
