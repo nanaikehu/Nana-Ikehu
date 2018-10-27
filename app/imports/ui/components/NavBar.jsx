@@ -4,12 +4,12 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Container, Image, Header } from 'semantic-ui-react';
-import { Roles} from 'meteor/alanning:roles';
+import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '10px', backgroundColor: '#181745'};
+    const menuStyle = { marginBottom: '10px', backgroundColor: '#333333'};
     const itemStyle = {fontFamily: "monospace", fontSize: "20px", color: 'white'};
     return (
         <Menu borderless className="topmenu" style={menuStyle}>
