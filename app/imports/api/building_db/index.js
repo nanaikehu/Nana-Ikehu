@@ -58,6 +58,19 @@ if (Meteor.isServer) {
 
 }
 
+console.log(sample.find().fetch().length)
 
 
-export { Buildings, sample };
+if (Meteor.isServer) {
+  Meteor.publish('sample', function () {
+    return sample.find();
+  });
+}
+
+if (Meteor.isClient) {
+  sub_sample = Meteor.subscribe('sample',function() {
+    console.log(sample.find().count());
+  });
+}
+
+export { Buildings, sample, sub_sample };

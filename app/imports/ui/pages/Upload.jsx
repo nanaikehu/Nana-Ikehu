@@ -2,12 +2,17 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
-
+import { Meteor } from "meteor/meteor";
+import '../../api/building_db'
 
 
 /** A simple static component to render some text for the landing page. */
 class Upload extends React.Component {
+
   constructor(props) {
+
+
+
     super(props);
     this.csvParsed = {};
     this.keys = {};
@@ -16,6 +21,7 @@ class Upload extends React.Component {
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.readSingleFile = this.readSingleFile.bind(this);
     this.promptHeaders = this.promptHeaders.bind(this);
+
   }
 
   readSingleFile(e) {
@@ -48,7 +54,7 @@ class Upload extends React.Component {
             <input type="file" id="file-input" onChange={this.readSingleFile}/>
           </Grid.Row>
           <Grid.Row>
-            <pre id="file-content">{sample.find().fetch()}</pre>
+            <pre id="file-content">{console.log(sample.find().fetch())}</pre>
           </Grid.Row>
         </Grid>
     );
