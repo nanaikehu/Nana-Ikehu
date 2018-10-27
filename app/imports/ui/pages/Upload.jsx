@@ -4,6 +4,7 @@ import Papa from 'papaparse'
 import { _ } from 'meteor/underscore'
 import { Meteor } from "meteor/meteor";
 import '../../api/building_db'
+import { withTracker } from 'meteor/react-meteor-data';
 
 
 /** A simple static component to render some text for the landing page. */
@@ -60,5 +61,6 @@ class Upload extends React.Component {
     );
   }
 }
+
 
 export default Upload;
