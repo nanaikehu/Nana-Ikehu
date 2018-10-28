@@ -7,15 +7,14 @@ import Graph2 from '../components/Graph2'
 class Landing extends React.Component {
   render() {
     return (
-
-        <Container>
+        <Container fluid>
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-        <Card.Group itemsPerRow={2}>
-          <Graph1/>
-          <Graph1/>
-          <Graph1/>
-          <Graph1/>
-        </Card.Group>
+          <Card.Group itemsPerRow={2}>
+            <Graph1/>
+            <Graph1/>
+            <Graph1/>
+            <Graph1/>
+          </Card.Group>
         </Container>
 
     );

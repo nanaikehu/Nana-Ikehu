@@ -12,11 +12,12 @@ import { withTracker } from 'meteor/react-meteor-data';
   {x: 4, y: 19000}
 ];*/
 let data = [];
+
 // For displaying percentages in the pie chart.
 const getPercent = (num) => {
-  const arr = data.map(i => i.y)
+  const arr = data.map(i => i.y);
   return ((num / arr.reduce((accumulator, currentValue) => accumulator + currentValue)) * 100).toFixed(1);
-}
+};
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 export class Graph1 extends React.Component {
@@ -28,7 +29,7 @@ export class Graph1 extends React.Component {
   renderGraph() {
     console.log(Buildings);
 
-    const style = { fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white' };
+    const style = { fontFamily: 'Nunito Sans Light', backgroundColor: 'gray', color: 'white' };
     let byDay = _.groupBy(this.props.data, item => new Date(item.date).getDay());
     console.log(byDay)
     _.each(byDay, function(weekday, index){
@@ -44,8 +45,8 @@ export class Graph1 extends React.Component {
     console.log(data)
 
     return (
-        <Container>
-        <Card style={style} raised={true} color={'red'}>
+        <Card>
+          <Card.Content raised={true}>
           <Card.Content>
             <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
             <hr/>
@@ -57,18 +58,16 @@ export class Graph1 extends React.Component {
                   width={400} height={400}
                   data={data}
                   labelRadius={100}
-                  colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
-                  style={{ labels: { fontSize: 12, fill: "white" } }}
+                  colorScale={['#51BCCD', '#F5B14F', '#6AD1A4', '#BDDA6D', '#F18F4C', '#EDD85F']}
+                  style={{ data: { stroke: '#5E7480', strokeWidth: 3 }, labels: { fontSize: 12, fill: '#5E7480' } }}
                   labels={(d) => `${getPercent(d.y)}%`}
               />
             </svg>
           </Card.Content>
         </Card>
-        </Container>
     );
   }
 }
-
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
