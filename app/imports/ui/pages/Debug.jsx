@@ -6,6 +6,7 @@ import { Meteor } from "meteor/meteor";
 import '../../api/building_db'
 import { withTracker } from 'meteor/react-meteor-data';
 import {sample} from '../../api/building_db';
+import Graph1 from '../components/Graph1'
 
 /** A simple static component to render some text for the landing page. */
 class Debug extends React.Component {
@@ -15,9 +16,7 @@ class Debug extends React.Component {
 
   renderPage() {
     return (
-        <Grid verticalAlign='middle' textAlign='center' container>
-          {sample.find().fetch().map( (item, key) => <Grid.Row key={key}>kw: {item.kw} date: {new Date(item.date).toString()}</Grid.Row>)}
-        </Grid>
+          <Graph1/>
     );
   }
 }
