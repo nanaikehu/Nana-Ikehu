@@ -16,7 +16,7 @@ if (Meteor.isServer) {
   const buildings_raw = Papa.parse(text);
 
   buildings_raw.data.shift(); // remove header
-
+  let insertArray = [];
   _.each(buildings_raw.data, item => {
     const array = _.values(item);
     const data_insert = {
@@ -29,9 +29,11 @@ if (Meteor.isServer) {
       csvLabels: [],
 
     };
-    Buildings.insert(data_insert);
+    insertArray.push(data_insert)
 
-  });
+  })
+  Buildings.batchInsert(insertArray)
+  ;
 
 }
 export const sample = new Mongo.Collection('sample');
@@ -45,20 +47,21 @@ if (Meteor.isServer) {
   const sample_raw = Papa.parse(text);
 
   sample_raw.data.shift(); // remove header
-
+  let insertArray = [];
   _.each(sample_raw.data, item => {
     const array = _.values(item);
     const data_insert = {
       date: new Date(array[0]),
       kw: array[1],
     };
-    sample.insert(data_insert);
+   insertArray.push(data_insert)
 
   });
-
+  sample.insert(insertArray);
 }
 
 console.log("buildingdb " + sample.find().fetch().length)
+
 
 
 if (Meteor.isServer) {
