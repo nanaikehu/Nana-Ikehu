@@ -14,7 +14,7 @@ class NavBar extends React.Component {
     return (
         <Menu borderless className="topmenu" style={menuStyle}>
           <Container>
-            <Menu.Item><Image size='tiny' circular src="/images/meteor-logo.png"/></Menu.Item>
+            <Menu.Item><Image size='small' src="/images/nana.png"/></Menu.Item>
             <Menu.Item as={NavLink} activeClassName="" exact to="/">
               <Header inverted as='h1'>Nana Ikehu</Header>
             </Menu.Item>
