@@ -57,7 +57,7 @@ export class Graph1 extends React.Component {
                   width={400} height={400}
                   data={data}
                   labelRadius={100}
-                  colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
+                  colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green" ]}
                   style={{ labels: { fontSize: 12, fill: "white" } }}
                   labels={(d) => `${getPercent(d.y)}%`}
               />

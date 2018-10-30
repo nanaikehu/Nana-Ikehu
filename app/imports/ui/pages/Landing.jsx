@@ -12,9 +12,7 @@ class Landing extends React.Component {
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
         <Card.Group itemsPerRow={2}>
           <Graph1/>
-          <Graph1/>
-          <Graph1/>
-          <Graph1/>
+          <Graph2/>
         </Card.Group>
         </Container>
 
