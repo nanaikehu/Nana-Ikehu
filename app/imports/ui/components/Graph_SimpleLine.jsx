@@ -41,7 +41,7 @@ export class Graph_SimpleLine extends React.Component {
             >
               <VictoryLine
                   style={{
-                    data: { stroke: "#c43a31" },
+                    data: { stroke: "#c43a31",  strokeWidth: 0.2      },
                     parent: { border: "1px solid #ccc"}
                   }}
                   data={this.state.data}
