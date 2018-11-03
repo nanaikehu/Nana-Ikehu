@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Container, Header } from 'semantic-ui-react';
-import Graph1 from '../components/Graph1'
-import Graph2 from '../components/Graph2'
+import Map1 from '../components/Map'
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -9,11 +8,8 @@ class Landing extends React.Component {
     return (
         <Container fluid>
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-          <Card.Group itemsPerRow={2}>
-            <Graph1/>
-            <Graph1/>
-            <Graph1/>
-            <Graph1/>
+          <Card.Group itemsPerRow={1}>
+            <Map1/>
           </Card.Group>
         </Container>
 
