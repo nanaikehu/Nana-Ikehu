@@ -1,16 +1,10 @@
 import React from 'react';
-import { Card, Loader, Container } from 'semantic-ui-react';
-import { VictoryPie, VictoryLegend } from 'victory';
+import { Card, Loader } from 'semantic-ui-react';
+import { VictoryPie, VictoryTheme, VictoryLegend } from 'victory';
 import { Buildings, sample } from '../../api/building_db'
 import { _ } from 'meteor/underscore'
 import { withTracker } from 'meteor/react-meteor-data';
 
-/*const data = [
-  {x: 1, y: 13000},
-  {x: 2, y: 16500},
-  {x: 3, y: 14250},
-  {x: 4, y: 19000}
-];*/
 let data = [];
 // For displaying percentages in the pie chart.
 const getPercent = (num) => {
@@ -26,27 +20,24 @@ export class Graph1 extends React.Component {
   }
 
   renderGraph() {
-    console.log(Buildings);
+    // console.log("building "+Buildings);
 
     const style = { fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white' };
     let byDay = _.groupBy(this.props.data, item => new Date(item.date).getDay());
-    console.log(byDay)
-    _.each(byDay, function (weekday, index) {
+    // console.log("byDay "+byDay);
+    _.each(byDay, function(weekday, index){
       let kws = _.pluck(weekday, 'kw')
       kws = _.map(kws, num => parseFloat(num))
       kws = _.filter(kws, item1 => isFinite(item1));
-      console.log(kws)
-      var sum = _.reduce(kws, function (memo, num) {
-        return memo + parseFloat(num);
-      }, 0);
-      console.log(sum)
-      data.push({ x: index, y: sum })
+      // console.log("kws "+kws);
+      var sum = _.reduce(kws, function(memo, num){ return memo + parseFloat(num); }, 0);
+      // console.log("sum "+sum);
+      data.push({x:`Day ${index}`, y:sum})
     })
 
-    console.log(data)
+    // console.log("data "+data)
 
     return (
-        <Container>
           <Card style={style} raised={true} color={'red'}>
             <Card.Content>
               <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
@@ -66,42 +57,42 @@ export class Graph1 extends React.Component {
                                ]}
                 />
 
-                <VictoryPie
-                    events={[{
-                      target: "data",
-                      eventHandlers: {
-                        onClick: () => {
-                          return [
-                            {
-                              target: "data",
-                              mutation: (props) => {
-                                const fill = props.style && props.style.fill;
-                                return fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
-                              }
-                            }, {
-                              target: "labels",
-                              mutation: (props) => {
-                                return props.text === "clicked" ? null : { text: "clicked" };
-                              }
+              <VictoryPie
+                  standalone={false}
+                  padAngle={3}
+                  innerRadius={100}
+                  width={400} height={400}
+                  data={data}
+                  labelRadius={60}
+                  colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green" ]}
+                  style={{ labels: { fontSize: 10, fill: "white" } }}
+                  theme={VictoryTheme.material}
+                  labels={(d) => `${getPercent(d.y)}%`}
+                  events={[{
+                    target: "data",
+                    eventHandlers: {
+                      onClick: () => {
+                        return [
+                          {
+                            target: "data",
+                            mutation: (props) => {
+                              const fill = props.style && props.style.fill;
+                              return fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
                             }
-                          ];
-                        }
+                          }, {
+                            target: "labels",
+                            mutation: (props) => {
+                              return props.text === "clicked" ? null : { text: "clicked" };
+                            }
+                          }
+                        ];
                       }
-                    }]}
-
-                    standalone={false}
-                    width={400} height={400}
-                    data={data}
-                    labelRadius={100}
-                    colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green"]}
-                    style={{ labels: { fontSize: 12, fill: "white" } }}
-                    labels={(d) => `${getPercent(d.y)}%`}
-                />
-
-              </svg>
-            </Card.Content>
-          </Card>
-        </Container>
+                    }
+                  }]}
+              />
+            </svg>
+          </Card.Content>
+        </Card>
     );
   }
 }
