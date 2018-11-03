@@ -10,7 +10,7 @@ class Footer extends React.Component {
         <footer>
           <div style={divStyle} className="ui center aligned container">
             <hr/>
-            <Grid container stackable centered columns={3} className='bottomgrid'>
+            <Grid container stackable centered columns={3}>
 
               <Grid.Column textAlign='center'>
                 <p>ABOUT US</p><br/>
