@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Loader } from 'semantic-ui-react';
+import { Card, Loader, Container } from 'semantic-ui-react';
 import { VictoryPie, VictoryTheme, VictoryLegend } from 'victory';
 import { Buildings, sample } from '../../api/building_db'
 import { _ } from 'meteor/underscore'
@@ -38,6 +38,7 @@ export class Graph1 extends React.Component {
     // console.log("data "+data)
 
     return (
+        <Container>
           <Card style={style} raised={true} color={'red'}>
             <Card.Content>
               <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
@@ -93,6 +94,7 @@ export class Graph1 extends React.Component {
             </svg>
           </Card.Content>
         </Card>
+        </Container>
     );
   }
 }
