@@ -23,16 +23,21 @@ export class Graph1 extends React.Component {
     // console.log("building "+Buildings);
 
     const style = { fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white' };
+    const legendData = [
+      { name: "week 1" }, { name: "week 2" }, { name: "week 3" }, { name: "week 4" }, { name: "week 5" }, { name: "week 6" }, { name: "week 7" }
+    ];
     let byDay = _.groupBy(this.props.data, item => new Date(item.date).getDay());
     // console.log("byDay "+byDay);
-    _.each(byDay, function(weekday, index){
+    _.each(byDay, function (weekday, index) {
       let kws = _.pluck(weekday, 'kw')
       kws = _.map(kws, num => parseFloat(num))
       kws = _.filter(kws, item1 => isFinite(item1));
       // console.log("kws "+kws);
-      var sum = _.reduce(kws, function(memo, num){ return memo + parseFloat(num); }, 0);
+      var sum = _.reduce(kws, function (memo, num) {
+        return memo + parseFloat(num);
+      }, 0);
       // console.log("sum "+sum);
-      data.push({x:`Day ${index}`, y:sum})
+      data.push({ x: `Day ${index}`, y: sum })
     })
 
     // console.log("data "+data)
@@ -45,55 +50,61 @@ export class Graph1 extends React.Component {
               <hr/>
             </Card.Content>
             <Card.Content>
-              <svg viewBox="0 0 400 400">
-                <VictoryLegend x={125} y={10}
-                               title="Percentage kw usage/week"
-                               centerTitle
-                               orientation="horizontal"
+              <svg viewBox="0 0 600 600">
+                <VictoryLegend standalone={false}
+                               colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green"]}
+                               x={15} y={0}
                                gutter={20}
-                               style={{ border: { stroke: "black" } }}
-                               colorScale={[ "tomato", "orange", "gold", "cyan", "navy", "red", "green" ]}
-                               data={[
-                                 { name: "Week 1" }, { name: "Week 2" }, { name: "Week 3" }, { name: "Week 4" }, { name: "Week 5" }, { name: "Week 6" }, { name: "Week 7" }
-                               ]}
+                               orientation="horizontal"
+                               title="% usage of kW/week"
+                               centerTitle
+                               style={{
+                                 border: { stroke: "white" },
+                                 labels: { fill: "white" },
+                                 title: {fontSize: 20, fill: "white" }
+                               }}
+                               data={legendData}
                 />
 
-              <VictoryPie
-                  standalone={false}
-                  padAngle={3}
-                  innerRadius={100}
-                  width={400} height={400}
-                  data={data}
-                  labelRadius={60}
-                  colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green" ]}
-                  style={{ labels: { fontSize: 10, fill: "white" } }}
-                  theme={VictoryTheme.material}
-                  labels={(d) => `${getPercent(d.y)}%`}
-                  events={[{
-                    target: "data",
-                    eventHandlers: {
-                      onClick: () => {
-                        return [
-                          {
-                            target: "data",
-                            mutation: (props) => {
-                              const fill = props.style && props.style.fill;
-                              return fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
+                <VictoryPie
+                    standalone={false}
+                    padAngle={3}
+                    innerRadius={100}
+                    width={550} height={550}
+                    data={data}
+                    labelRadius={60}
+                    padding={{
+                      left: 15, bottom: 20, top: 80
+                    }}
+                    colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green"]}
+                    style={{ labels: { fontSize: 10, fill: "white" } }}
+                    theme={VictoryTheme.material}
+                    labels={(d) => `${getPercent(d.y)}%`}
+                    events={[{
+                      target: "data",
+                      eventHandlers: {
+                        onClick: () => {
+                          return [
+                            {
+                              target: "data",
+                              mutation: (props) => {
+                                const fill = props.style && props.style.fill;
+                                return fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
+                              }
+                            }, {
+                              target: "labels",
+                              mutation: (props) => {
+                                return props.text === "clicked" ? null : { text: "clicked" };
+                              }
                             }
-                          }, {
-                            target: "labels",
-                            mutation: (props) => {
-                              return props.text === "clicked" ? null : { text: "clicked" };
-                            }
-                          }
-                        ];
+                          ];
+                        }
                       }
-                    }
-                  }]}
-              />
-            </svg>
-          </Card.Content>
-        </Card>
+                    }]}
+                />
+              </svg>
+            </Card.Content>
+          </Card>
         </Container>
     );
   }
