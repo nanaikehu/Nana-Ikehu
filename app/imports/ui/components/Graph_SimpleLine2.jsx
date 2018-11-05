@@ -14,25 +14,18 @@ export class Graph_SimpleLine2 extends React.Component {
     };
 
   }
-  componentWillMount() {
-    const self = this;
-    Meteor.call('getMeterbyDate', this.props.meterId, this.props.start, this.props.end, (error, response) => {
-      if (error) {
-      console.log('SimpleLine' + error);
-      } else {
-        console.log('res+ ')
-        console.log(response)
-        self.setState({ data: response });
-      }
-    });
-  }
+
+  // componentDidMount() {
+  //   this.setState({ data: this.props.data });
+  // }
 
   render() {
-    return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
+    return (this.props.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   renderGraph() {
     // console.log(this.state.data.SampleTsUtc);
+  // render() {
     return (
         <Card>
           <Card.Content>
@@ -54,7 +47,7 @@ export class Graph_SimpleLine2 extends React.Component {
                       data: { stroke: '#c43a31' },
                       parent: { border: '1px solid #ccc' },
                     }}
-                    data={this.state.data}
+                    data={this.props.data}
                     x={this.props.time}
                     y={this.props.mean}
                 />
@@ -73,6 +66,7 @@ Graph_SimpleLine2.propTypes = {
   end: PropTypes.instanceOf(Date),
   time: PropTypes.string,
   mean: PropTypes.string,
+  data: PropTypes.array,
 };
 Graph_SimpleLine2.defaultProps = {
   time: 'time',

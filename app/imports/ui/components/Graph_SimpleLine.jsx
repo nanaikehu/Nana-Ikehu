@@ -26,13 +26,19 @@ export class Graph_SimpleLine extends React.Component {
       }
     });
   }
-
+  // componentWillMount() {
+  //   this.setState(this.props.data);
+  // }
   render() {
     return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   renderGraph() {
-    // console.log(this.state.data[0].time);
+  // render() {
+  //   console.log(this.state.data[0].time);
+    // console.log(this.state.data)
+    console.log('running')
+
     return (
         <Card>
           <Card.Content>
@@ -71,6 +77,7 @@ Graph_SimpleLine.propTypes = {
   meterId: PropTypes.number.isRequired,
   time: PropTypes.string,
   mean: PropTypes.string,
+  // data: PropTypes.array,
 };
 Graph_SimpleLine.defaultProps = {
   time: 'time',
