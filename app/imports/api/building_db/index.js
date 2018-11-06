@@ -35,6 +35,28 @@ if (Meteor.isServer) {
   })
   Buildings.batchInsert(insertArray);
 
+  let tags = fs.readFileSync('assets/app/files/TagIds.csv', 'utf8');
+
+  let tagraw = Papa.parse(tags, { header: true, skipEmptyLines: true, trimHeaders: true }).data;
+
+  let buildlist = _.pluck(Buildings.find().fetch(), 'name')
+
+  tagraw = _.groupBy(tagraw, row => {
+    let currentMeters = Buildings.find({
+      name: row.BuildingName
+    }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
+    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters) {
+
+      let meterAdd = {
+        name: row.EntityName,
+        unit: row.TagName,
+        id: parseInt(row.TagLogId)
+      };
+      Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
+
+    }
+  })
+
   Meteor.publish('building', function () {
     return Buildings.find({});
   })
@@ -67,8 +89,6 @@ if (Meteor.isServer) {
     kwData._ensureIndex({ meterId: 1, time: 1 });
     kwData._ensureIndex({ time: 1, meterId: 1 });
 
-
-
   }
 
   Meteor.publish('kwData', function () {
@@ -78,7 +98,7 @@ if (Meteor.isServer) {
   Meteor.methods({
         'getMeter': (id) => {
           console.log(id)
-          return kwData.find({ meterId: id },{fields : {_id: 0, meterId: 0}}).fetch()
+          return kwData.find({ meterId: id }, { fields: { _id: 0, meterId: 0 } }).fetch()
         },
         'getAllbyDate': (start, end) => {
           console.log(new Date(start).toISOString())
@@ -89,18 +109,21 @@ if (Meteor.isServer) {
             }
           }).fetch()
         }
-      ,
-      'getMeterbyDate': (id, start, end) => {
-    console.log(new Date(start).toISOString())
-    return kwData.find({meterId: id,
-      time: {
-        $lte: new Date(end),
-        $gte: new Date(start)
-      }
-    }, {fields : {_id: 0, meterId: 0}}).fetch()
+        ,
+        'getMeterbyDate': (id, start, end) => {
+          console.log(new Date(start).toISOString())
+          return kwData.find({
+            meterId: id,
+            time: {
+              $lte: new Date(end),
+              $gte: new Date(start)
+            }
+          }, { fields: { _id: 0, meterId: 0 } }).fetch()
+        },
+    'getBuildings' : () => {
+    return Buildings.find().fetch();
   }
-}
-
+      }
   )
 
 }
