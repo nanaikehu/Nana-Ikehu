@@ -45,7 +45,7 @@ if (Meteor.isServer) {
     let currentMeters = Buildings.find({
       name: row.BuildingName
     }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
-    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters) {
+    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters && row.TagName == 'kW') {
 
       let meterAdd = {
         name: row.EntityName,
@@ -56,7 +56,14 @@ if (Meteor.isServer) {
       Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
 
     }
-  })
+  }
+
+  )
+// Prune empty
+  let empty = Buildings.find({meters : []}).fetch();
+  empty.map(noMeter => Buildings.remove({ _id : noMeter._id }))
+
+
 
   Meteor.publish('building', function () {
     return Buildings.find({});
