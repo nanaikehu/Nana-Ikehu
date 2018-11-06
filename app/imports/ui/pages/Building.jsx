@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from "meteor/meteor";
+import {Graph_SimpleLine} from '../components/Graph_SimpleLine';
 
 export class Building extends React.Component {
 
@@ -13,6 +14,7 @@ export class Building extends React.Component {
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this)
     this.DropdownMeterList = this.DropdownMeterList.bind(this)
+    this.meterSelected = this.meterSelected.bind(this)
 
   }
 
@@ -59,28 +61,38 @@ export class Building extends React.Component {
       })
       return (
 
-          <Dropdown placeholder='Select Meter' fluid search selection options={selection}/>
+          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
 
       );
     }
   }
 
+
+  meterSelected(e, name) {
+    this.setState({ meter: name.value });
+    console.log("meter ID: " + name.value)
+  }
+
   render() {
+
     return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   onBuilding(e, name) {
     this.setState({ build: name.value });
-    console.log(name.value)
+    console.log("build ID: " + name.value)
   }
 
   renderGraph() {
 
-    return (
+    return (<div>
 
         <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
                   onChange={this.onBuilding}/>
+          { (this.state.build) ? this.DropdownMeterList() : '' }
 
+          { (this.state.meter) ? <Graph_SimpleLine meterId={this.state.meter} x={'time'} y={'mean'}/> : null}
+        </div>
     );
   }
 

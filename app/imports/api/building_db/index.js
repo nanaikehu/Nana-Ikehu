@@ -52,6 +52,7 @@ if (Meteor.isServer) {
         unit: row.TagName,
         id: parseInt(row.TagLogId)
       };
+
       Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
 
     }
