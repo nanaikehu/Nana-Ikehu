@@ -1,17 +1,11 @@
 import React from 'react';
-import { Card, Loader } from 'semantic-ui-react';
-import { VictoryPie } from 'victory';
+import { Card, Loader, Container } from 'semantic-ui-react';
+import { VictoryPie, VictoryTheme, VictoryLegend } from 'victory';
+import { Buildings, sample } from '../../api/building_db'
 import { _ } from 'meteor/underscore'
 import { withTracker } from 'meteor/react-meteor-data';
 
-/*const data = [
-  {x: 1, y: 13000},
-  {x: 2, y: 16500},
-  {x: 3, y: 14250},
-  {x: 4, y: 19000}
-];*/
-
-
+let data = [];
 // For displaying percentages in the pie chart.
 const getPercent = (num) => {
   const arr = data.map(i => i.y);
@@ -34,7 +28,10 @@ export class Graph1 extends React.Component {
 
   renderGraph() {
 
-    const style = { fontFamily: 'Nunito Sans Light', backgroundColor: 'gray', color: 'white' };
+    const style = { fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white' };
+    const legendData = [
+      { name: "week 1" }, { name: "week 2" }, { name: "week 3" }, { name: "week 4" }, { name: "week 5" }, { name: "week 6" }, { name: "week 7" }
+    ];
     let byDay = _.groupBy(this.state.data, item => new Date(item.date).getDay());
     let data = [];
     console.log(byDay)
@@ -48,28 +45,72 @@ export class Graph1 extends React.Component {
       data.push({x:index, y:sum})
     })
 
-    console.log(data)
+    // console.log("data "+data)
 
     return (
-        <Card>
-          <Card.Content>
-            <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
-            <hr/>
-          </Card.Content>
-          <Card.Content>
-            <svg viewBox="0 0 400 400">
-              <VictoryPie
-                  standalone={false}
-                  width={400} height={400}
-                  data={data}
-                  labelRadius={100}
-                  colorScale={['#51BCCD', '#F5B14F', '#6AD1A4', '#BDDA6D', '#F18F4C', '#EDD85F']}
-                  style={{ data: { stroke: '#5E7480', strokeWidth: 3 }, labels: { fontSize: 12, fill: '#5E7480' } }}
-                  labels={(d) => `${getPercent(d.y)}%`}
-              />
-            </svg>
-          </Card.Content>
-        </Card>
+        <Container>
+          <Card style={style} raised={true} color={'red'}>
+            <Card.Content>
+              <Card.Header style={style} textAlign={'center'}>Recent Activity</Card.Header>
+              <hr/>
+            </Card.Content>
+            <Card.Content>
+              <svg viewBox="0 0 600 600">
+                <VictoryLegend standalone={false}
+                               colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green"]}
+                               x={15} y={0}
+                               gutter={20}
+                               orientation="horizontal"
+                               title="% usage of kW/week"
+                               centerTitle
+                               style={{
+                                 border: { stroke: "white" },
+                                 labels: { fill: "white" },
+                                 title: {fontSize: 20, fill: "white" }
+                               }}
+                               data={legendData}
+                />
+
+                <VictoryPie
+                    standalone={false}
+                    padAngle={3}
+                    innerRadius={100}
+                    width={550} height={550}
+                    data={data}
+                    labelRadius={60}
+                    padding={{
+                      left: 15, bottom: 20, top: 80
+                    }}
+                    colorScale={["tomato", "orange", "gold", "cyan", "navy", "red", "green"]}
+                    style={{ labels: { fontSize: 10, fill: "white" } }}
+                    theme={VictoryTheme.material}
+                    labels={(d) => `${getPercent(d.y)}%`}
+                    events={[{
+                      target: "data",
+                      eventHandlers: {
+                        onClick: () => {
+                          return [
+                            {
+                              target: "data",
+                              mutation: (props) => {
+                                const fill = props.style && props.style.fill;
+                                return fill === "#c43a31" ? null : { style: { fill: "#c43a31" } };
+                              }
+                            }, {
+                              target: "labels",
+                              mutation: (props) => {
+                                return props.text === "clicked" ? null : { text: "clicked" };
+                              }
+                            }
+                          ];
+                        }
+                      }
+                    }]}
+                />
+              </svg>
+            </Card.Content>
+          </Card>
+        </Container>
     );
   }
 }

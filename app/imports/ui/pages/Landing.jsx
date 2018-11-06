@@ -8,11 +8,16 @@ import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
 class Landing extends React.Component {
   render() {
     return (
+        <div className = 'landing-background'>
+
         <Container fluid>
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-            <Graph_SimpleLine meterId={5} x={'time'} y={'mean'}/>
+          <Graph_SimpleLine meterId={5} x={'time'} y={'mean'}/>
+        <Card.Group itemsPerRow={2}>
+          <Graph1/>
+        </Card.Group>
         </Container>
-
+        </div>
     );
   }
 }
