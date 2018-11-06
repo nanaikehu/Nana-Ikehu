@@ -7,17 +7,47 @@ export class Graph_SimpleLine extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = { data : '' };
+    this.state = { data : '', meterId: this.props.meterId };
+    this.componentDidUpdate = this.componentDidUpdate.bind(this)
 
   }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+
+    if (this.props.meterId !== prevProps.meterId) {
+      let self = this;
+      this.setState({meterId : this.props.meterId})
+      this.setState({data : ''})
+      Meteor.call("getMeter", this.props.meterId ,(error, response) => {
+        if(error) {
+          console.log('SimpleLine' + error)
+        } else {
+          console.log("res + for ID " + this.state.meterId)
+          if(!response.length){
+            response = [];
+          }
+          self.setState({ data : response });
+        }
+      });
+    }
+  }
+
+
+
+
+
   componentWillMount() {
     const self = this;
-    Meteor.call("getMeter", this.props.meterId ,(error, response) => {
+    Meteor.call("getMeter", this.state.meterId ,(error, response) => {
       if(error) {
       console.log('SimpleLine' + error)
       } else {
-        console.log("res+ ")
+        console.log("res + for ID " + this.state.meterId)
         console.log(response)
+        if(!response.length){
+          response = [];
+        }
         self.setState({ data : response });
       }
     });

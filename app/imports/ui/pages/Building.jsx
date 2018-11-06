@@ -71,6 +71,7 @@ export class Building extends React.Component {
   meterSelected(e, name) {
     this.setState({ meter: name.value });
     console.log("meter ID: " + name.value)
+
   }
 
   render() {
@@ -84,15 +85,14 @@ export class Building extends React.Component {
   }
 
   renderGraph() {
-
     return (<div>
 
         <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
                   onChange={this.onBuilding}/>
           { (this.state.build) ? this.DropdownMeterList() : '' }
 
-          { (this.state.meter) ? <Graph_SimpleLine meterId={this.state.meter} x={'time'} y={'mean'}/> : null}
-        </div>
+          { (this.state.meter) && <Graph_SimpleLine meterId={this.state.meter} x={'time'} y={'mean'}/> }
+</div>
     );
   }
 
