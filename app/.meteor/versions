@@ -47,6 +47,7 @@ localstorage@1.2.0
 logging@1.1.20
 meteor@1.9.2
 meteor-base@1.4.0
+mikowals:batch-insert@1.1.9
 minifier-css@1.4.0
 minifier-js@2.4.0
 minimongo@1.4.5

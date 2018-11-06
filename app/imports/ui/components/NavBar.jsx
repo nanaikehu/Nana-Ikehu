@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Container, Image, Header } from 'semantic-ui-react';
-import { Roles} from 'meteor/alanning:roles';
+import { Roles } from 'meteor/alanning:roles';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
@@ -18,7 +18,7 @@ class NavBar extends React.Component {
             <Menu.Item as={NavLink} activeClassName="" exact to="/">
               <Header inverted as='h3'>Nana Ikehu</Header>
             </Menu.Item>
-            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/upload" key='upload'>Upload</Menu.Item>
+            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
           </Container>
 
         </Menu>

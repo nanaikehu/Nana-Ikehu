@@ -8,36 +8,41 @@ import { withTracker } from 'meteor/react-meteor-data';
 let data = [];
 // For displaying percentages in the pie chart.
 const getPercent = (num) => {
-  const arr = data.map(i => i.y)
+  const arr = data.map(i => i.y);
   return ((num / arr.reduce((accumulator, currentValue) => accumulator + currentValue)) * 100).toFixed(1);
-}
+};
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 export class Graph1 extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data: ''
+    }
+  }
+
 
   render() {
-    return (this.props.ready) ? this.renderGraph() : <Loader active>Getting data</Loader>;
+    return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   renderGraph() {
-    // console.log("building "+Buildings);
 
     const style = { fontFamily: 'Nunito Sans Light', backgroundColor: '#0f2c57', color: 'white' };
     const legendData = [
       { name: "week 1" }, { name: "week 2" }, { name: "week 3" }, { name: "week 4" }, { name: "week 5" }, { name: "week 6" }, { name: "week 7" }
     ];
-    let byDay = _.groupBy(this.props.data, item => new Date(item.date).getDay());
-    // console.log("byDay "+byDay);
-    _.each(byDay, function (weekday, index) {
+    let byDay = _.groupBy(this.state.data, item => new Date(item.date).getDay());
+    let data = [];
+    console.log(byDay)
+    _.each(byDay, function(weekday, index){
       let kws = _.pluck(weekday, 'kw')
       kws = _.map(kws, num => parseFloat(num))
       kws = _.filter(kws, item1 => isFinite(item1));
-      // console.log("kws "+kws);
-      var sum = _.reduce(kws, function (memo, num) {
-        return memo + parseFloat(num);
-      }, 0);
-      // console.log("sum "+sum);
-      data.push({ x: `Day ${index}`, y: sum })
+      console.log(kws)
+      let sum = _.reduce(kws, function(memo, num){ return memo + parseFloat(num); }, 0);
+      console.log(sum)
+      data.push({x:index, y:sum})
     })
 
     // console.log("data "+data)
@@ -112,10 +117,8 @@ export class Graph1 extends React.Component {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  const subscription = Meteor.subscribe('sample');
-  return {
-    data: sample.find({}).fetch(),
-    ready: subscription.ready(),
-  };
+  this.state.data = '';
+  Meteor.call('getAllbyDate', new Date('2/20/2018'), new Date('2/21/2018') , (err, res) => this.state.data = res)
+
 })(Graph1);
 
