@@ -30,16 +30,6 @@ export default class Map1 extends Component {
 
   refmarker = React.createRef()
 
-  getColor(d) {
-    return d > 1000 ? '#800026' :
-        d > 500  ? '#BD0026' :
-            d > 200  ? '#E31A1C' :
-                d > 100  ? '#FC4E2A' :
-                    d > 50   ? '#FD8D3C' :
-                        d > 20   ? '#FEB24C' :
-                            d > 10   ? '#FED976' :
-                                '#FFEDA0';
-  }
 
   style(feature) {
     return {
@@ -88,41 +78,6 @@ export default class Map1 extends Component {
             </span>
               </Popup>
             </Marker>
-
-            <Rectangle bounds={biomedical} fillColor="red" >
-              <Popup>
-                Some data could go here
-              </Popup>
-            </Rectangle>
-            <Rectangle bounds={business} fillColor="red"><Popup>
-              Some data could go here
-            </Popup>
-            </Rectangle>
-            <Rectangle bounds={eng} fillColor="red" ><Popup>
-              Some data could go here
-            </Popup>
-            </Rectangle>
-            <Rectangle bounds={bachman} fillColor="red" ><Popup>
-              Some data could go here
-            </Popup>
-            </Rectangle>
-            <Rectangle bounds={architecture} fillColor="red">
-              <Popup>
-                Some data could go here
-              </Popup>
-            </Rectangle>
-            <Rectangle bounds={korean} fillColor="red" >
-              <Popup>
-                Some data could go here
-              </Popup>
-            </Rectangle>
-            <HeatmapLayer
-                fitBoundsOnLoad
-                fitBoundsOnUpdate
-                points={addressPoints}
-                longitudeExtractor={m => m[1]}
-                latitudeExtractor={m => m[0]}
-                intensityExtractor={m => parseFloat(m[2])}
           </Map>
         </Card>
     )
