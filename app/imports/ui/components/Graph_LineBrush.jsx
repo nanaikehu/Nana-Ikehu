@@ -147,7 +147,7 @@ return filtered;
                           fontSize: 50,
                         },
                       }}
-                      data={this.reduceBrush() }
+                      data={this.state.data }
                       x={this.props.x}
                       y={this.props.y}
                   />
