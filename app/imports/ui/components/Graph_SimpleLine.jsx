@@ -61,26 +61,36 @@ export class Graph_SimpleLine extends React.Component {
   renderGraph() {
 
     return (
+          <Card>
+            <Card.Content>
+              <VictoryChart
+                  theme={VictoryTheme.material}
+                  scale={{x : 'time'}}
+                  containerComponent={
+                    <VictoryZoomContainer zoomDimension="x"/>
+                  }
+              >
+                <VictoryLine
+                    style={{
+                      data: { stroke: '#c43a31', strokeWidth: 0.2 },
+                      parent: { border: '1px solid #5E7480' },
+                      labels: {
+                        fontSize: 50,
+                      },
+                    }}
+                    animate={{
+                      duration: 2000,
+                      onLoad: { duration: 1000 }
+                    }}
+                    data={this.state.data}
+                    x={this.props.x}
+                    y={this.props.y}
+                />
 
-            <VictoryChart
-                theme={VictoryTheme.material}
-                scale={{x : 'time'}}
-                containerComponent={
-                  <VictoryZoomContainer zoomDimension="x"/>
-                }
-            >
-              <VictoryLine
-                  style={{
-                    data: { stroke: "#c43a31",  strokeWidth: 0.2      },
-                    parent: { border: "1px solid #ccc"}
-                  }}
-                  data={this.state.data}
-                  x={this.props.x}
-                  y={this.props.y}
-              />
 
-
-            </VictoryChart>
+              </VictoryChart>
+            </Card.Content>
+          </Card>
     );
   }
 }

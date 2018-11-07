@@ -8,25 +8,11 @@ class Footer extends React.Component {
     const divStyle = { paddingTop: '15px', color: '#C2C4C5', backgroundColor: '#ECEFF1'};
     return (
         <footer>
-          <div style={divStyle} className="ui center aligned container">
-            <hr/>
-            <Grid container stackable centered columns={3}>
-
-              <Grid.Column textAlign='center'>
-                <p>ABOUT US</p><br/>
-                <p><a href='#'>{'Learn More'}</a></p>
-              </Grid.Column>
-
-              <Grid.Column textAlign='center'>
-                <p>CAREERS</p><br/>
-                <p><a href='#'>Learn more</a></p>
-              </Grid.Column>
-
-              <Grid.Column textAlign='center'>
-                <p>CONTACT US</p><br/>
-                <p><a href='#'>Learn more</a></p>
-              </Grid.Column>
-            </Grid>
+          <div style={divStyle} className="ui center aligned fluid container">
+            <hr />
+            Department of Information and Computer Sciences <br />
+            University of Hawaii<br />
+            Honolulu, HI 96822
           </div>
         </footer>
     );

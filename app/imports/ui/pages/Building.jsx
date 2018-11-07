@@ -1,10 +1,11 @@
 import React from 'react';
-import { Dropdown, Loader } from 'semantic-ui-react';
+import { Dropdown, Loader, Card, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from "meteor/meteor";
-import {Graph_SimpleLine} from '../components/Graph_SimpleLine';
+import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
+import { Graph_LineBrush } from '../components/Graph_LineBrush';
 
 export class Building extends React.Component {
 
@@ -61,7 +62,7 @@ export class Building extends React.Component {
       })
       return (
 
-          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
+        <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
 
       );
     }
@@ -85,14 +86,17 @@ export class Building extends React.Component {
   }
 
   renderGraph() {
-    return (<div>
+    return (
+        <div>
 
-        <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
+          <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
                   onChange={this.onBuilding}/>
           { (this.state.build) ? this.DropdownMeterList() : '' }
-
+          <Card.Group itemsPerRow={2}>
           { (this.state.meter) && <Graph_SimpleLine meterId={this.state.meter} x={'time'} y={'mean'}/> }
-</div>
+          { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'}/> }
+          </Card.Group>
+        </div>
     );
   }
 

@@ -16,7 +16,7 @@ class NavBar extends React.Component {
           <Container>
             <Menu.Item><Image size='tiny' src="/images/nana.png"/></Menu.Item>
             <Menu.Item as={NavLink} activeClassName="" exact to="/">
-              <Header inverted as='h3'>Nana Ikehu</Header>
+              <Header inverted as='h1'>Nana Ikehu</Header>
             </Menu.Item>
             <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
           </Container>
