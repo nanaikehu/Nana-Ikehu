@@ -1,23 +1,32 @@
 import React from 'react';
-import { Dropdown, Loader, Card, Container } from 'semantic-ui-react';
+import { Dropdown, Loader, Card, Input, Grid, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from "meteor/meteor";
 import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
+import DatePicker from 'react-date-picker';
+import TextSum from '../components/TextSum'
 
 export class Building extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { data: '' };
+    var today = new Date()
+    var priorDate = new Date().setDate(today.getDate()-30)
+    this.state = { data: '',  dateStart: new Date(priorDate),   dateEnd: today};
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this)
     this.DropdownMeterList = this.DropdownMeterList.bind(this)
     this.meterSelected = this.meterSelected.bind(this)
+    this.endChange = this.endChange.bind(this)
+    this.startChange = this.startChange.bind(this)
 
   }
+
+  endChange = date => {this.setState({ dateEnd: date }); console.log(this.state)}
+  startChange = date => this.setState({ dateStart: date })
 
   componentWillMount() {
     const self = this;
@@ -55,8 +64,8 @@ export class Building extends React.Component {
       _.forEach(selected.meters, build => {
         let x = {
           key: build.id,
-          value: build.id,
-          text: build.unit + build.name
+          value: build.id + " " + build.unit + " " + build.name,
+          text: build.unit + " " + build.name,
         }
         selection.push(x)
       })
@@ -70,10 +79,11 @@ export class Building extends React.Component {
 
 
   meterSelected(e, name) {
-    this.setState({ meter: name.value });
-    console.log("meter ID: " + name.value)
+    let x = name.value.split(" ")
+    this.setState({ meter: parseInt(x[0]), unit: x[1]});
+ }
 
-  }
+
 
   render() {
 
@@ -86,16 +96,45 @@ export class Building extends React.Component {
   }
 
   renderGraph() {
+    let pad = {margin : '10px 10px 10px 10px'}
+    let barpad = {marginBottom : '8px'}
     return (
-        <div>
+        <div style={pad}>
+          <Grid columns={2} padded >
 
+            <Grid.Row>
+              <Grid.Column >
+                <DatePicker
+                    name="dateStart"
+                    placeholder="Start"
+                    value={this.state.dateStart}
+                    onChange={this.startChange} />
+              </Grid.Column>
+              <Grid.Column >
+                <DatePicker
+                    name="dateEnd"
+                    placeholder="End"
+                    value={this.state.dateEnd}
+                    onChange={this.endChange} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row style={barpad}>
+              <Grid.Column >
           <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                  onChange={this.onBuilding}/>
+                    onChange={this.onBuilding}/></Grid.Column>
+              <Grid.Column >
           { (this.state.build) ? this.DropdownMeterList() : '' }
-          <Card.Group itemsPerRow={2}>
-          { (this.state.meter) && <Graph_SimpleLine meterId={this.state.meter} x={'time'} y={'mean'}/> }
-          { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'}/> }
+              </Grid.Column>
+            </Grid.Row>
+
+          </Grid>
+          <Container height={'80%'}>
+          <Card.Group itemsPerRow={1} >
+            { (this.state.meter) && <TextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
+            { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }
           </Card.Group>
+          </Container>
+
         </div>
     );
   }

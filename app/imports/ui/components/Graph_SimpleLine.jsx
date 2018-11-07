@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Loader } from 'semantic-ui-react';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer  } from 'victory';
 import PropTypes from 'prop-types';
+import { _ } from 'meteor/underscore';
 
 export class Graph_SimpleLine extends React.Component {
 
@@ -15,11 +16,11 @@ export class Graph_SimpleLine extends React.Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
 
-    if (this.props.meterId !== prevProps.meterId) {
+    if (this.props.meterId !== prevProps.meterId || this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
       let self = this;
       this.setState({meterId : this.props.meterId})
       this.setState({data : ''})
-      Meteor.call("getMeter", this.props.meterId ,(error, response) => {
+      Meteor.call("getMeterbyDate", this.props.meterId , new Date(this.props.dateStart) , new Date(this.props.dateEnd),(error, response) => {
         if(error) {
           console.log('SimpleLine' + error)
         } else {
@@ -27,6 +28,9 @@ export class Graph_SimpleLine extends React.Component {
           if(!response.length){
             response = [];
           }
+
+          console.log(response)
+
           self.setState({ data : response });
         }
       });
@@ -39,7 +43,7 @@ export class Graph_SimpleLine extends React.Component {
 
   componentWillMount() {
     const self = this;
-    Meteor.call("getMeter", this.state.meterId ,(error, response) => {
+    Meteor.call("getMeterbyDate", this.props.meterId , new Date(this.props.dateStart) , new Date(this.props.dateEnd),(error, response) => {
       if(error) {
       console.log('SimpleLine' + error)
       } else {
@@ -48,6 +52,10 @@ export class Graph_SimpleLine extends React.Component {
         if(!response.length){
           response = [];
         }
+
+
+
+          console.log(response)
         self.setState({ data : response });
       }
     });
@@ -61,7 +69,7 @@ export class Graph_SimpleLine extends React.Component {
   renderGraph() {
 
     return (
-          <Card>
+          <Card fluid>
             <Card.Content>
               <VictoryChart
                   theme={VictoryTheme.material}
@@ -97,9 +105,13 @@ export class Graph_SimpleLine extends React.Component {
 Graph_SimpleLine.propTypes = {
   meterId: PropTypes.number.isRequired,
   x: PropTypes.string,
-  y: PropTypes.string
+  y: PropTypes.string,
+  dateStart: PropTypes.string,
+  dateEnd: PropTypes.string
 };
 Graph_SimpleLine.defaultProps = {
   x: 'x',
-  y: 'y'
+  y: 'y',
+  dateStart: new Date('1/1/1970'),
+  dateEnd: new Date()
 };
