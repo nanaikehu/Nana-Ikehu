@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Graph_LineBrush } from './Graph_LineBrush';
 
-export default class TextSum extends React.Component {
+export default class MeterTextSum extends React.Component {
   constructor(props) {
     super(props);
   this.state = {data:''}
@@ -79,13 +79,13 @@ export default class TextSum extends React.Component {
 
 }
 
-TextSum.propTypes = {
+MeterTextSum.propTypes = {
     meterId: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
     dateStart: PropTypes.string,
     dateEnd: PropTypes.string
 };
-TextSum.defaultProps = {
+MeterTextSum.defaultProps = {
   dateStart: new Date('1/1/1970'),
   dateEnd: new Date()
 };

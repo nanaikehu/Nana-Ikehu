@@ -7,7 +7,7 @@ import { Meteor } from "meteor/meteor";
 import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import DatePicker from 'react-date-picker';
-import TextSum from '../components/TextSum'
+import MeterTextSum from '../components/MeterTextSum'
 
 export class Building extends React.Component {
 
@@ -130,7 +130,7 @@ export class Building extends React.Component {
           </Grid>
           <Container height={'80%'}>
           <Card.Group itemsPerRow={1} >
-            { (this.state.meter) && <TextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
+            { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
             { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }
           </Card.Group>
           </Container>

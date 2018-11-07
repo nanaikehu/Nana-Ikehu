@@ -128,9 +128,37 @@ if (Meteor.isServer) {
             }
           }, { fields: { _id: 0, meterId: 0 } }).fetch()
         },
-    'getBuildings' : () => {
-    return Buildings.find().fetch();
-  }
+        'getBuildings': () => {
+          return Buildings.find().fetch();
+        },
+
+        'sumByDate': (start, end) => {
+          console.log(start)
+          console.log(new Date(end))
+          let resp = {};
+          let x = kwData.find({
+            time: {
+              $lte: new Date(end),
+              $gte: new Date(start)
+            }
+          }).forEach(meterLog =>{
+
+            if(resp[meterLog.meterId] == null){
+              resp[meterLog.meterId] = {}
+              resp[meterLog.meterId].mean = 0;
+              resp[meterLog.meterId].max = 0;
+            }
+            resp[meterLog.meterId].max = Math.max(resp[meterLog.meterId].max,meterLog.max)
+            resp[meterLog.meterId].mean += meterLog.mean
+
+              }
+
+          )
+          console.log(resp)
+
+          return resp
+
+        }
       }
   )
 
