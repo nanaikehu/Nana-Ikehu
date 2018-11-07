@@ -45,11 +45,11 @@ if (Meteor.isServer) {
     let currentMeters = Buildings.find({
       name: row.BuildingName
     }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
-    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters && row.TagName == 'kW') {
+    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters) {
 
       let meterAdd = {
         name: row.EntityName,
-        unit: row.TagName,
+        unit: row.TagName.toUpperCase(),
         id: parseInt(row.TagLogId)
       };
 
@@ -133,8 +133,6 @@ if (Meteor.isServer) {
         },
 
         'sumByDate': (start, end) => {
-          console.log(start)
-          console.log(new Date(end))
           let resp = {};
           let x = kwData.find({
             time: {
@@ -155,8 +153,22 @@ if (Meteor.isServer) {
 
           )
           console.log(resp)
+          let buildings = {};
+          _.each(resp, (object, key) => {
+            Buildings.find({meters: {$elemMatch: {id: parseInt(key)}}}).forEach(entry => {
 
-          return resp
+              if(buildings[entry.name] == null){
+                buildings[entry.name] = [];
+              }
+              let meter =_.findWhere(entry.meters, {id: parseInt(key)});
+              if(meter.name.includes("MAIN"))
+              buildings[entry.name].push(object)
+
+            })
+
+          })
+          console.log(buildings)
+          return { meters: resp, buildings : buildings}
 
         }
       }
