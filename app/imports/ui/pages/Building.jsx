@@ -70,8 +70,7 @@ export class Building extends React.Component {
         selection.push(x)
       })
       return (
-
-        <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
+          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
 
       );
     }
@@ -96,22 +95,24 @@ export class Building extends React.Component {
   }
 
   renderGraph() {
-    let pad = {margin : '10px 10px 10px 10px'}
+    let pad = {marginTop : '4em'}
     let barpad = {marginBottom : '8px'}
+    const pickerColor = { color: '#fff' }
+    const style = { textAlign: 'center' }
     return (
         <div style={pad}>
-          <Grid columns={2} padded >
+          <Grid columns={2} centered>
 
             <Grid.Row>
-              <Grid.Column >
-                <DatePicker
+              <Grid.Column style={style}>
+                <DatePicker className='datePicker' style={{border: 'none'}}
                     name="dateStart"
                     placeholder="Start"
                     value={this.state.dateStart}
                     onChange={this.startChange} />
               </Grid.Column>
-              <Grid.Column >
-                <DatePicker
+              <Grid.Column style={style}>
+                <DatePicker className='datePicker' style={pickerColor}
                     name="dateEnd"
                     placeholder="End"
                     value={this.state.dateEnd}
@@ -119,7 +120,7 @@ export class Building extends React.Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row style={barpad}>
-              <Grid.Column >
+              <Grid.Column>
           <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
                     onChange={this.onBuilding}/></Grid.Column>
               <Grid.Column >

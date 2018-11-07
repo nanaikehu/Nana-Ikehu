@@ -89,9 +89,9 @@ return filtered;
   }
 
   renderGraph() {
-
+    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
     return (
-          <Card fluid>
+          <Card style={divStyle} fluid>
             <Card.Content>
               <div>
                 <VictoryChart height={250} scale={{ x: 'time' }}
@@ -105,18 +105,22 @@ return filtered;
                 >
                   <VictoryAxis
                       fixLabelOverlap={true}
+                      style={{
+                        ticks: { fill: '#fff' },
+                        tickLabels: { fill: '#fff' },
+                      }}
                   />
                   <VictoryLine
                       style={{
-                        data: { stroke: '#c43a31', strokeWidth: 0.2 },
+                        data: { stroke: '#ccff00', strokeWidth: 0.5 },
                         parent: { border: '1px solid #5E7480' },
-                        labels: {
-                          fontSize: 50,
-                        },
+                        // labels: {
+                        //   fontSize: 50,
+                        // },
                       }}
                       animate={{
                         duration: 2000,
-                        onLoad: { duration: 1000 }
+                        onLoad: { duration: 1000 },
                       }}
                       data={this.state.data}
                       x={this.props.x}
