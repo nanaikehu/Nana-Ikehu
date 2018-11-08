@@ -119,14 +119,14 @@ export class Building extends React.Component {
                     onChange={this.endChange} />
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row style={barpad}>
-              <Grid.Column>
+            <Grid.Column style={barpad}>
+              <Grid.Row>
           <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                    onChange={this.onBuilding}/></Grid.Column>
-              <Grid.Column >
+                    onChange={this.onBuilding}/></Grid.Row>
+              <Grid.Row >
           { (this.state.build) ? this.DropdownMeterList() : '' }
-              </Grid.Column>
-            </Grid.Row>
+              </Grid.Row>
+            </Grid.Column>
 
           </Grid>
           <Container height={'80%'}>

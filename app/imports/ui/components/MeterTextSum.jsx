@@ -73,7 +73,6 @@ export default class MeterTextSum extends React.Component {
             Summation: {sumPoint.toFixed(2) + " " + this.props.unit}<br/>
           </Card.Content>
         </Card>
-
     )
   }
 
