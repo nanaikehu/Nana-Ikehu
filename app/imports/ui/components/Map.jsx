@@ -5,8 +5,6 @@ import { Map, TileLayer, Marker, Popup, Rectangle,} from 'react-leaflet'
 import { Card, Container} from 'semantic-ui-react'
 import defaultBuilding from '../../api/building_db/buildingCoor'
 import { _ } from 'meteor/underscore';;
-import PropTypes from 'prop-types';
-import Building from '../pages/Building';
 import { Link } from 'react-router-dom';
 
 
@@ -44,9 +42,6 @@ export default class Map1 extends Component {
               </Marker>}
 
             )}
-
-
-
           </Map>
         </Card>
     )
