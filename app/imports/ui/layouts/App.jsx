@@ -17,7 +17,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Upload from '../pages/Upload'
 import Debug from '../pages/Debug';
-import { Building } from '../pages/Building';
+import  Building  from '../pages/Building';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
