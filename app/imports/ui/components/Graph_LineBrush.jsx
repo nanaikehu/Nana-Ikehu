@@ -110,6 +110,13 @@ return filtered;
                       tickLabels: { fill: '#fff' },
                     }}
                 />
+                <VictoryAxis dependentAxis
+                             fixLabelOverlap={true}
+                             style={{
+                               ticks: { fill: '#fff' },
+                               tickLabels: { fill: '#fff' },
+                             }}
+                />
                 <VictoryLine
                     style={{
                       data: { stroke: '#ccff00', strokeWidth: 0.5 },
