@@ -84,13 +84,19 @@ Miles Topping, Director of Energy Management at University of Hawaii for providi
 
 ### HAAC Sponsors: 
 [Bill and Melinda Gates Foundation](https://www.gatesfoundation.org/)
+
 [Hawaii Department of Agriculture](http://hdoa.hawaii.gov/)
+
 [Kaiser Permanente](https://thrive.kaiserpermanente.org/)
+
 [Transform Hawaii Government](http://transformhawaiigov.org/)
 
 [DataHouse](http://www.datahouse.com/)
+
 [Pacxa](http://www.pacxa.com/)
+
 [Salesforce](https://www.salesforce.com/)
+
 [Unisys](https://www.unisys.com/)
 
 
