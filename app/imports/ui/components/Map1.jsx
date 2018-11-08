@@ -25,7 +25,7 @@ export default class Map1 extends Component {
 
     return (
         <Card>
-          <Map center={position} zoom={17} minZoom={'16'} style={{height: '600px'}}>
+          <Map center={position} zoom={16} minZoom={'16'} style={{height: '600px'}}>
             <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
@@ -36,7 +36,7 @@ export default class Map1 extends Component {
              return <Marker position={x}>
                 <Popup minWidth={90}>
             <span>
-              <Link to={"/building/" + item.code}>Building {item.code}</Link>
+              <Link to={"/building/" + item.code}>Building</Link>
             </span>
                 </Popup>
               </Marker>}
