@@ -24,10 +24,10 @@ class App extends React.Component {
   render() {
     return (
         <Router>
-          <div>
+          <div className='app'>
             <NavBar/>
             <Switch>
-              <Route exact path="/" component={Landing}/>
+              <Route exact path="/" component={Building}/>
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/upload" component={Upload}/>

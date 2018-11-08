@@ -22,29 +22,28 @@ export default  class DateTimeForm extends React.Component {
   };
 
   render() {
+    const formStyle = { textAlign: 'center' }
     return (
-        <Form>
-          <Grid columns={2} divided>
-            <Grid.Row>
+          <Grid columns={2}>
+            <Grid.Row centered>
               <Grid.Column>
-          <DateInput
-              name="dateStart"
-              placeholder="Start"
-              value={this.state.dateStart}
-              iconPosition="left"
-              onChange={this.handleDateChange} />
+                <DateInput
+                    name="dateStart"
+                    placeholder="Start"
+                    value={this.state.dateStart}
+                    iconPosition="left"
+                    onChange={this.handleDateChange} />
               </Grid.Column>
               <Grid.Column>
-          <DateInput
-              name="dateEnd"
-              placeholder="End"
-              value={this.state.dateEnd}
-              iconPosition="left"
-              onChange={this.handleDateChange} />
+                <DateInput
+                    name="dateEnd"
+                    placeholder="End"
+                    value={this.state.dateEnd}
+                    iconPosition="left"
+                    onChange={this.handleDateChange} />
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Form>
     );
   }
 }

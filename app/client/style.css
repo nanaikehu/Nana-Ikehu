@@ -3,27 +3,66 @@ a {
   text-decoration: underline;
 }
 
-footer {
-  position:relative;
-  left:0px;
-  bottom:0px;
-  height:100px;
-  width:100%;
+/*.landing-background {*/
+  /*width: 100%;*/
+  /*height: 90vh;*/
+  /*color: #fff;*/
+  /*background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);*/
+  /*background-size: 400% 400%;*/
+  /*-webkit-animation: Gradient 15s ease infinite;*/
+  /*-moz-animation: Gradient 15s ease infinite;*/
+  /*animation: Gradient 15s ease infinite;*/
+/*}*/
+.app{
+  background-color: #0c121f;
+  position: relative;
+  min-height: 100vh;
 }
 
-.grouped{
-  padding: 10px
+.ui.fluid.search.selection.dropdown{
+  background-color: #383b4a;
 }
 
-.landing-background {
-  padding-bottom : 20px;
-  width: 100%;
+.ui.search.dropdown > .text{
   color: #fff;
-  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+}
+
+.ui.dropdown:not(.button) > .default.text, .ui.default.dropdown:not(.button) > .text{
+  color: #fff;
+}
+
+.ui.selection.dropdown .menu > .item{
+  color: #fff;
+  background-color: #383b4a;
+  border-top: none !important;
+}
+
+.datePicker{
+  border-bottom: thin solid white;
+}
+
+.react-date-picker__wrapper{
+  border: none !important;
+}
+
+.react-date-picker__inputGroup__input, .react-date-picker__inputGroup__divider{
+  color: white;
+}
+
+.react-date-picker__button:enabled{
+  color:white !important;
+}
+
+/*.ui.cards > .card > .content, .ui.card > .content{*/
+  /*background-color: #383b4a;*/
+/*}*/
+.footer{
+  position:absolute;
+  left:0;
+  bottom:0;
+  right:0;
+  overflow: auto;
+  display: inline-block;
 }
 
 /*@-webkit-keyframes Gradient {*/

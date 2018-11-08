@@ -38,7 +38,7 @@ export default class Map1 extends Component {
              return <Marker position={x}>
                 <Popup minWidth={90}>
             <span>
-              <Link to="/building">Building</Link>
+              <Link to={"/building/" + item.code}>Building</Link>
             </span>
                 </Popup>
               </Marker>}
