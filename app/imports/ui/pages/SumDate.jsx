@@ -1,14 +1,7 @@
 import React from 'react';
-import { Card, Container, Header,Dropdown } from 'semantic-ui-react';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Meteor } from "meteor/meteor";
-import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
-import { Graph1 } from '../components/Graph1';
+import { Card, Header,Dropdown } from 'semantic-ui-react';
 import { Building } from '../pages/Building';
-import { _ } from 'meteor/underscore';
-import Graph2 from '../components/Graph2';
 import PieDriver from '../components/PieDriver';
-import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import LineBrushDriver from '../components/LineBrushDriver';
 
 /** A simple static component to render some text for the landing page. */
