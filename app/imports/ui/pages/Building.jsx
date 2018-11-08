@@ -77,8 +77,9 @@ export class Building extends React.Component {
         }
         selection.push(x)
       })
-      if(this.state.meter == null)
+      if(this.state.meter == ''){
       this.setState( {meter : selection[0].key, unit: 'kW'})
+      }
       return (
           <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected} defaultValue={selection[0].value}/>
 
