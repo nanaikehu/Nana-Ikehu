@@ -17,7 +17,9 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Upload from '../pages/Upload'
 import Debug from '../pages/Debug';
-import { Building } from '../pages/Building';
+import  Building  from '../pages/Building';
+import ListMap from '../pages/ListMap';
+import SumDate from '../pages/SumDate';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -27,13 +29,15 @@ class App extends React.Component {
           <div className='app'>
             <NavBar/>
             <Switch>
-              <Route exact path="/" component={Building}/>
+              <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/upload" component={Upload}/>
               <Route path="/debug" component={Debug}/>
               <Route exact path="/building" component={Building}/>
               <Route path="/building/:code" component={Building}/>
+              <Route path="/map" component={ListMap}/>
+              <Route path="/sumdate" component={SumDate}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>

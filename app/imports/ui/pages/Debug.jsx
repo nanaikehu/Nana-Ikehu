@@ -6,7 +6,6 @@ import { Meteor } from "meteor/meteor";
 import '../../api/building_db'
 import { withTracker } from 'meteor/react-meteor-data';
 import {sample} from '../../api/building_db';
-import Graph1 from '../components/Graph1'
 
 /** A simple static component to render some text for the landing page. */
 class Debug extends React.Component {
@@ -15,9 +14,6 @@ class Debug extends React.Component {
   }
 
   renderPage() {
-    return (
-          <Graph1/>
-    );
   }
 }
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */

@@ -20,7 +20,9 @@ class NavBar extends React.Component {
                 <Header inverted as='h1'>Nana Ikehu</Header>
             </Menu.Item>
             </Grid>
-            {/*<Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>*/}
+            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/sumdate" key='upload'>Sum By Date</Menu.Item>
+            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
+            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/map" key='upload'>Map</Menu.Item>
           </Container>
 
         </Menu>

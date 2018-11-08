@@ -9,7 +9,7 @@ import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import DatePicker from 'react-date-picker';
 import MeterTextSum from '../components/MeterTextSum'
 
-export class Building extends React.Component {
+export default class Building extends React.Component {
 
   constructor(props) {
     super(props)
