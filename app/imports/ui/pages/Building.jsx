@@ -131,6 +131,7 @@ export default class Building extends React.Component {
           </Grid>
           <Container height={'80%'}>
           <Card.Group itemsPerRow={1} >
+            { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
             { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }
           </Card.Group>
           </Container>

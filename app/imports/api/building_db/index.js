@@ -45,11 +45,11 @@ if (Meteor.isServer) {
     let currentMeters = Buildings.find({
       name: row.BuildingName
     }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
-    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters) {
+    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters && row.TagName == 'kW') {
 
       let meterAdd = {
         name: row.EntityName,
-        unit: row.TagName.toUpperCase(),
+        unit: row.TagName,
         id: parseInt(row.TagLogId)
       };
 
@@ -97,7 +97,6 @@ if (Meteor.isServer) {
     kwData.batchInsert(insertArray)
     kwData._ensureIndex({ meterId: 1, time: 1 });
     kwData._ensureIndex({ time: 1, meterId: 1 });
-    kwData._ensureIndex({ time: 1});
   }
 
   Meteor.publish('kwData', function () {
@@ -152,6 +151,7 @@ if (Meteor.isServer) {
               resp[meterLog.meterId].max = meterLog.max
               resp[meterLog.meterId].maxDate = meterLog.time;
             }
+            resp[meterLog.meterId].max = Math.max(resp[meterLog.meterId].max,meterLog.max)
             resp[meterLog.meterId].mean += meterLog.mean
 
               }
@@ -182,7 +182,7 @@ if (Meteor.isServer) {
             mean = _.reduce(mean, function(memo, num){ return memo + num; }, 0)
 
             let z = _.where(resp, {max: max})
-
+            return resp
 
             if(!isFinite(max))
               max = 0;
