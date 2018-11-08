@@ -9,7 +9,7 @@ import Graph2 from './Graph2';
 export default class PieDriver extends React.Component {
   constructor(props) {
     super(props);
-  this.state = {data: ''}
+    this.state = {data: ''}
   }
 
   componentDidUpdate(prevProps) {
@@ -51,12 +51,11 @@ export default class PieDriver extends React.Component {
 
 
   renderGraph() {
-    console.log("ssssssss")
     console.log(this.state.data)
     return(
         <Card fluid>
           <Card.Content>
-          <Graph2 data={this.state.data.buildings} x={'name'} y={'sum'}/>
+            <Graph2 data={this.state.data.buildings} x={'name'} y={'sum'}/>
           </Card.Content>
         </Card>
 

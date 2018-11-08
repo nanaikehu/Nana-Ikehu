@@ -42,21 +42,21 @@ if (Meteor.isServer) {
   let buildlist = _.pluck(Buildings.find().fetch(), 'name')
 
   tagraw = _.groupBy(tagraw, row => {
-    let currentMeters = Buildings.find({
-      name: row.BuildingName
-    }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
-    if (buildlist.some((item) =>item == row.BuildingName) && currentMeters && row.TagName == 'kW') {
+        let currentMeters = Buildings.find({
+          name: row.BuildingName
+        }, { fields: { _id: 0, meters: 1 } }).fetch()[0];
+        if (buildlist.some((item) =>item == row.BuildingName) && currentMeters && row.TagName == 'kW') {
 
-      let meterAdd = {
-        name: row.EntityName,
-        unit: row.TagName,
-        id: parseInt(row.TagLogId)
-      };
+          let meterAdd = {
+            name: row.EntityName,
+            unit: row.TagName,
+            id: parseInt(row.TagLogId)
+          };
 
-      Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
+          Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
 
-    }
-  }
+        }
+      }
 
   )
 // Prune empty
@@ -86,7 +86,7 @@ if (Meteor.isServer) {
         max: parseFloat(item.Max)
       };
       if(parseFloat(item.Mean) != 0)
-      insertArray.push(data_insert)
+        insertArray.push(data_insert)
 
       if (insertArray.length == 10000) {
         kwData.batchInsert(insertArray);
@@ -141,18 +141,18 @@ if (Meteor.isServer) {
             }
           }).forEach(meterLog =>{
 
-            if(resp[meterLog.meterId] == null){
-              resp[meterLog.meterId] = {}
-              resp[meterLog.meterId].mean = 0;
-              resp[meterLog.meterId].max = 0;
-              resp[meterLog.meterId].maxDate = '';
-            }
-            if(resp[meterLog.meterId].max <= meterLog.max){
-              resp[meterLog.meterId].max = meterLog.max
-              resp[meterLog.meterId].maxDate = meterLog.time;
-            }
-            resp[meterLog.meterId].max = Math.max(resp[meterLog.meterId].max,meterLog.max)
-            resp[meterLog.meterId].mean += meterLog.mean
+                if(resp[meterLog.meterId] == null){
+                  resp[meterLog.meterId] = {}
+                  resp[meterLog.meterId].mean = 0;
+                  resp[meterLog.meterId].max = 0;
+                  resp[meterLog.meterId].maxDate = '';
+                }
+                if(resp[meterLog.meterId].max <= meterLog.max){
+                  resp[meterLog.meterId].max = meterLog.max
+                  resp[meterLog.meterId].maxDate = meterLog.time;
+                }
+                resp[meterLog.meterId].max = Math.max(resp[meterLog.meterId].max,meterLog.max)
+                resp[meterLog.meterId].mean += meterLog.mean
 
               }
 
@@ -166,7 +166,7 @@ if (Meteor.isServer) {
               }
               let meter =_.findWhere(entry.meters, {id: parseInt(key)});
               if(meter.name.includes("MAIN"))
-              buildings[entry.name].push(object)
+                buildings[entry.name].push(object)
 
             })
 
@@ -182,7 +182,6 @@ if (Meteor.isServer) {
             mean = _.reduce(mean, function(memo, num){ return memo + num; }, 0)
 
             let z = _.where(resp, {max: max})
-            return resp
 
             if(!isFinite(max))
               max = 0;
@@ -202,25 +201,25 @@ if (Meteor.isServer) {
 
         },
 
-    'sumHourly': (start, end) => {
-      let byDay = kwData.find({
-        time: {
-          $lte: new Date(end),
-          $gte: new Date(start)
+        'sumHourly': (start, end) => {
+          let byDay = kwData.find({
+            time: {
+              $lte: new Date(end),
+              $gte: new Date(start)
+            }
+          }).fetch();
+          let resp = [];
+          byDay = _.groupBy(byDay, item => item.time)
+          _.each(byDay, (dayArray,day) =>{
+            let sum =_.reduce(dayArray, function(memo, num){
+
+              return (num.mean != null) ? memo + num.mean : memo; }, 0)
+            if(isFinite(sum) )
+              resp.push({name : new Date(day), sum: sum})
+          } )
+          return resp;
+
         }
-      }).fetch();
-      let resp = [];
-      byDay = _.groupBy(byDay, item => item.time)
-      _.each(byDay, (dayArray,day) =>{
-        let sum =_.reduce(dayArray, function(memo, num){
-
-          return (num.mean != null) ? memo + num.mean : memo; }, 0)
-        if(isFinite(sum) )
-        resp.push({name : new Date(day), sum: sum})
-      } )
-      return resp;
-
-    }
       }
   )
 
