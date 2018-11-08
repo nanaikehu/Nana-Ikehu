@@ -22,6 +22,7 @@ Raw database files from Aurora BPA MS-SQL can be exported to CSV for import into
 `Max` is used to calculate peak demand
 
 This file can be automatically generated using Aurora BPA MS-SQL with this sample query:
+
 `SELECT SampleTsUtc,LogHour.TagLogId
       ,Mean
       ,Min
