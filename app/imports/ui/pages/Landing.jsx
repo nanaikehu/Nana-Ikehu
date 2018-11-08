@@ -1,14 +1,11 @@
 import React from 'react';
 import { Card, Container, Header } from 'semantic-ui-react';
-<<<<<<< HEAD
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from "meteor/meteor";
 import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
 import { Graph1 } from '../components/Graph1';
 import { Building } from '../pages/Building';
-=======
 import Map1 from '../components/Map'
->>>>>>> nguyen
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -18,14 +15,10 @@ class Landing extends React.Component {
 
         <Container fluid>
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-<<<<<<< HEAD
           {/*<Graph_SimpleLine meterId={5} x={'time'} y={'mean'}/>*/}
           <Card.Group itemsPerRow={2}>
             <Graph_SimpleLine meterId={5} x={'time'} y={'mean'}/>
-=======
-          <Card.Group itemsPerRow={1}>
             <Map1/>
->>>>>>> nguyen
           </Card.Group>
         </Container>
         </div>
