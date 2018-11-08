@@ -5,22 +5,16 @@ import { Meteor } from "meteor/meteor";
 import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
 import { Graph1 } from '../components/Graph1';
 import { Building } from '../pages/Building';
-<<<<<<< HEAD
 import { _ } from 'meteor/underscore';
-
 import Map1 from '../components/Map'
-=======
 import Graph2 from '../components/Graph2';
 import PieDriver from '../components/PieDriver';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import LineBrushDriver from '../components/LineBrushDriver';
->>>>>>> fe4331617884379eb78e7166976c42ac84809954
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
 
-<<<<<<< HEAD
-=======
   constructor(props) {
     super(props)
     this.date = new Date();
@@ -47,7 +41,6 @@ dateAgo(days){
   return (this.date) ? new Date(new Date().setDate(new Date([this.date]).getDate()-days)) : ''
 }
 
->>>>>>> fe4331617884379eb78e7166976c42ac84809954
   render() {
 
 
@@ -64,16 +57,12 @@ dateAgo(days){
         <div className = 'landing-background' style={{paddingBottom: '50px'}}>
 
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-<<<<<<< HEAD
-          <Card.Group itemsPerRow={1}>
-            <Map1/>
-=======
           <div className = 'grouped'>
             <Dropdown selection options={dropdown} onChange={this.rangeSelected} value={this.state.picked}/>
             <Card.Group itemsPerRow={2} style={{ paddingTop : '10px'}}>
+            <Map1/>
             <LineBrushDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd}/>
             <PieDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd} />
->>>>>>> fe4331617884379eb78e7166976c42ac84809954
           </Card.Group>
           </div>
         </div>
