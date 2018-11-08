@@ -32,7 +32,8 @@ class App extends React.Component {
               <Route path="/signup" component={Signup}/>
               <Route path="/upload" component={Upload}/>
               <Route path="/debug" component={Debug}/>
-              <Route path="/building" component={Building}/>
+              <Route exact path="/building" component={Building}/>
+              <Route path="/building/:code" component={Building}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>

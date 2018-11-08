@@ -15,13 +15,17 @@ export class Building extends React.Component {
     super(props)
     var today = new Date()
     var priorDate = new Date().setDate(today.getDate()-30)
-    this.state = { data: '',  dateStart: new Date(priorDate),   dateEnd: today};
+    this.state = { data: '',  dateStart: new Date(priorDate),   dateEnd: today, meter:''};
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this)
     this.DropdownMeterList = this.DropdownMeterList.bind(this)
     this.meterSelected = this.meterSelected.bind(this)
     this.endChange = this.endChange.bind(this)
     this.startChange = this.startChange.bind(this)
+
+    if(this.props.match.params.code){
+      this.state.build = this.props.match.params.code;
+    }
 
   }
 
@@ -36,7 +40,10 @@ export class Building extends React.Component {
       } else {
         console.log("res+ build ")
         console.log(response)
-        self.setState({ data: response });
+
+          self.setState({ data: response});
+
+
       }
     });
   }
@@ -58,8 +65,9 @@ export class Building extends React.Component {
 
   DropdownMeterList() {
     if (this.state.build) {
-
+      console.log(this.state.data)
       let selected = _.findWhere(this.state.data, { code: this.state.build });
+
       let selection = [];
       _.forEach(selected.meters, build => {
         let x = {
@@ -69,8 +77,10 @@ export class Building extends React.Component {
         }
         selection.push(x)
       })
+      if(this.state.meter == null)
+      this.setState( {meter : selection[0].key, unit: 'kW'})
       return (
-          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected}/>
+          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected} defaultValue={selection[0].value}/>
 
       );
     }
@@ -122,7 +132,7 @@ export class Building extends React.Component {
             <Grid.Column style={barpad}>
               <Grid.Row>
           <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                    onChange={this.onBuilding}/></Grid.Row>
+                    onChange={this.onBuilding} value={this.state.build}/></Grid.Row>
               <Grid.Row >
           { (this.state.build) ? this.DropdownMeterList() : '' }
               </Grid.Row>
