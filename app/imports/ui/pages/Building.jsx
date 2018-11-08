@@ -1,12 +1,9 @@
 import React from 'react';
-import { Dropdown, Loader, Card, Input, Grid, Container } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+import { Dropdown, Loader, Card, Grid, Container } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
-import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from "meteor/meteor";
-import { Graph_SimpleLine } from '../components/Graph_SimpleLine';
-import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import DatePicker from 'react-date-picker';
+import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import MeterTextSum from '../components/MeterTextSum'
 
 export default class Building extends React.Component {

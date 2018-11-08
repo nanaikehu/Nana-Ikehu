@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container, Header,Dropdown } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 
 
@@ -11,7 +11,7 @@ class Landing extends React.Component {
   render() {
 
     return (
-        <div></div>
+        <Image src={'/images/landing.jpg'} fluid/>
 
     );
   }
