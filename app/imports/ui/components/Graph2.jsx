@@ -28,10 +28,10 @@ class Graph2 extends React.Component {
           <VictoryPie
               labelComponent={<VictoryTooltip
                   x={size/2} y={size/2}
-                  width={size/2}
+                  width={size/3}
                   height={100}
                   flyoutStyle={ {fill : 'black'}
-                        }/>}
+                  }/>}
               standalone={false}
               width={size} height={size}
               data={this.props.data}
