@@ -29,7 +29,7 @@ export class AllTextSum extends React.Component {
 
 }
 export default withTracker(() => {
-  this
+
  const sub = false;
   return {
     data: ,

@@ -6,95 +6,39 @@ import PropTypes from 'prop-types';
 
 
 
-export class Graph_LineBrush extends React.Component {
+export class Graph_LineBrushAll extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       data: '',
-      meterId: this.props.meterId,
       zoomDomain: { x: [new Date(this.props.dateStart), new Date(this.props.dateEnd)] },
     };
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
-
+    this.handleZoom = this.handleZoom.bind(this)
   }
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-
-    if (this.props.meterId !== prevProps.meterId || this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
-      let self = this;
-      this.setState({meterId : this.props.meterId})
-      this.setState({data : ''})
-      Meteor.call("getMeterbyDate", this.props.meterId , new Date(this.props.dateStart) , new Date(this.props.dateEnd),(error, response) => {
-        if(error) {
-          console.log('SimpleLine' + error)
-        } else {
-          console.log("res + for ID " + this.state.meterId)
-          if(!response.length){
-            response = [];
-          }
-          self.setState({ data : response ,zoomDomain: { x: [new Date(this.props.dateStart), new Date(this.props.dateEnd)]}});
-        }
-      });
+    if (this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
+      this.setState({zoomDomain: { x: [new Date(this.props.dateStart), new Date(this.props.dateEnd)]}})
     }
   }
 
-
-
-
-
-  componentWillMount() {
-    const self = this;
-    Meteor.call("getMeterbyDate", this.props.meterId , new Date(this.props.dateStart) , new Date(this.props.dateEnd),(error, response) => {
-      if(error) {
-      console.log('SimpleLine' + error)
-      } else {
-        console.log("res + for ID " + this.state.meterId)
-        console.log(response)
-        if(!response.length){
-          response = [];
-        }
-        self.setState({ data : response, zoomDomain: { x: [new Date(this.props.dateStart), new Date(this.props.dateEnd)] },
-        });
-      }
-    });
-  }
-
-  reduceBrush()  {
-
-  const { zoomDomain, data } = this.state;
-let maxPoints = 100;
-const filtered = data.filter(
-    (d) => (d[this.props.x] >= zoomDomain.x[0] && d[this.props.x] <= zoomDomain.x[1]));
-
-// new code here...
-if (filtered.length > maxPoints ) {
-  const k = Math.ceil(filtered.length / maxPoints);
-  return filtered.filter(
-      (d, i) => ((i % k) === 0)
-  );
-}
-console.log(filtered)
-return filtered;
-
-}
 
   handleZoom(domain) {
     this.setState({ zoomDomain: domain });
   }
 
   render() {
-    return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
+    return (this.props.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   renderGraph() {
-
+console.log(this.props.data)
     return (
-          <Card fluid>
             <Card.Content>
-              <div>
-                <VictoryChart height={250} scale={{ x: 'time' }}
+                <VictoryChart height={410} scale={{ x: 'time' }}
                               containerComponent={
                                 <VictoryZoomContainer
                                     zoomDimension="x"
@@ -105,6 +49,9 @@ return filtered;
                 >
                   <VictoryAxis
                       fixLabelOverlap={true}
+                  />
+                  <VictoryAxis dependentAxis crossAxis
+                               standalone={false}
                   />
                   <VictoryLine
                       style={{
@@ -118,7 +65,7 @@ return filtered;
                         duration: 2000,
                         onLoad: { duration: 1000 }
                       }}
-                      data={this.state.data}
+                      data={this.props.data}
                       x={this.props.x}
                       y={this.props.y}
                   />
@@ -147,27 +94,21 @@ return filtered;
                           fontSize: 50,
                         },
                       }}
-                      data={this.reduceBrush() }
+                      data={this.props.data }
                       x={this.props.x}
                       y={this.props.y}
                   />
                 </VictoryChart>
-              </div>
             </Card.Content>
-          </Card>
     );
   }
 }
-Graph_LineBrush.propTypes = {
-  meterId: PropTypes.number.isRequired,
+Graph_LineBrushAll.propTypes = {
+  data: PropTypes.array.isRequired,
   x: PropTypes.string,
   y: PropTypes.string,
-  dateStart: PropTypes.string,
-  dateEnd: PropTypes.string
 };
-Graph_LineBrush.defaultProps = {
+Graph_LineBrushAll.defaultProps = {
   x: 'x',
   y: 'y',
-  dateStart: new Date('1/1/1970'),
-  dateEnd: new Date()
 };

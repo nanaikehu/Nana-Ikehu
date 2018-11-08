@@ -85,6 +85,7 @@ if (Meteor.isServer) {
         min: parseFloat(item.Min),
         max: parseFloat(item.Max)
       };
+      if(parseFloat(item.Mean) != 0)
       insertArray.push(data_insert)
 
       if (insertArray.length == 10000) {
@@ -96,7 +97,7 @@ if (Meteor.isServer) {
     kwData.batchInsert(insertArray)
     kwData._ensureIndex({ meterId: 1, time: 1 });
     kwData._ensureIndex({ time: 1, meterId: 1 });
-
+    kwData._ensureIndex({ time: 1});
   }
 
   Meteor.publish('kwData', function () {
@@ -145,14 +146,17 @@ if (Meteor.isServer) {
               resp[meterLog.meterId] = {}
               resp[meterLog.meterId].mean = 0;
               resp[meterLog.meterId].max = 0;
+              resp[meterLog.meterId].maxDate = '';
             }
-            resp[meterLog.meterId].max = Math.max(resp[meterLog.meterId].max,meterLog.max)
+            if(resp[meterLog.meterId].max <= meterLog.max){
+              resp[meterLog.meterId].max = meterLog.max
+              resp[meterLog.meterId].maxDate = meterLog.time;
+            }
             resp[meterLog.meterId].mean += meterLog.mean
 
               }
 
           )
-          console.log(resp)
           let buildings = {};
           _.each(resp, (object, key) => {
             Buildings.find({meters: {$elemMatch: {id: parseInt(key)}}}).forEach(entry => {
@@ -167,10 +171,56 @@ if (Meteor.isServer) {
             })
 
           })
-          console.log(buildings)
-          return { meters: resp, buildings : buildings}
 
+          let list = []
+
+          _.each(buildings, (listMeter,key) => {
+            let mean = _.pluck(listMeter, 'mean')
+            let max = _.pluck(listMeter, 'max')
+
+            max = _.max(max, a => a)
+            mean = _.reduce(mean, function(memo, num){ return memo + num; }, 0)
+
+            let z = _.where(resp, {max: max})
+
+
+            if(!isFinite(max))
+              max = 0;
+            if(!isFinite(mean))
+              mean = 0;
+            if(!_.isEmpty(z)){
+              z = z[0].maxDate
+            }else
+              z = new Date(0)
+
+
+            list.push({ name: key, sum : mean, max: max, maxDate: z})
+          } )
+
+
+          return { meters: resp, buildings : list}
+
+        },
+
+    'sumHourly': (start, end) => {
+      let byDay = kwData.find({
+        time: {
+          $lte: new Date(end),
+          $gte: new Date(start)
         }
+      }).fetch();
+      let resp = [];
+      byDay = _.groupBy(byDay, item => item.time)
+      _.each(byDay, (dayArray,day) =>{
+        let sum =_.reduce(dayArray, function(memo, num){
+
+          return (num.mean != null) ? memo + num.mean : memo; }, 0)
+        if(isFinite(sum) )
+        resp.push({name : new Date(day), sum: sum})
+      } )
+      return resp;
+
+    }
       }
   )
 
