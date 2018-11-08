@@ -19,6 +19,7 @@ if (Meteor.isServer) {
   buildings_raw.data.shift(); // remove header
   let insertArray = [];
   _.each(buildings_raw.data, item => {
+
     const array = _.values(item);
     const data_insert = {
       code: array[0],
@@ -30,6 +31,7 @@ if (Meteor.isServer) {
       csvLabels: [],
 
     };
+    if(array[0])
     insertArray.push(data_insert)
 
   })
@@ -52,7 +54,7 @@ if (Meteor.isServer) {
             unit: row.TagName,
             id: parseInt(row.TagLogId)
           };
-
+          console.log(meterAdd)
           Buildings.update({ name: row.BuildingName }, { $push : {meters: meterAdd}})
 
         }
