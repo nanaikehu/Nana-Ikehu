@@ -21,17 +21,16 @@ class Graph2 extends React.Component {
   render() {
     let data = this.props.data
     console.log("graph2")
-
+    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
     let size = 300;
     return (
-        <svg viewBox={`0 0 ${size} ${size}`}>
+        <svg style={divStyle} viewBox={`0 0 ${size} ${size}`}>
           <VictoryPie
               labelComponent={<VictoryTooltip
                   x={size/2} y={size/2}
-                  width={size/3}
+                  width={size/2.5}
                   height={100}
-                  flyoutStyle={ {fill : 'black'}
-                  }/>}
+                  />}
               standalone={false}
               width={size} height={size}
               data={this.props.data}
@@ -39,7 +38,13 @@ class Graph2 extends React.Component {
               y={this.props.y}
               labelRadius={100}
               colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
-              style={{ labels: { fontSize: 12, fill: "white" } }}
+              style={{
+                data: { stroke: '#c43a31', strokeWidth: 0.2 },
+                parent: { border: '1px solid #5E7480' },
+                labels: {
+                  fontSize: '10px',
+                },
+              }}
               labels={(d) => `${d[this.props.x]}: ${(d[this.props.y]*100/this.totalVal.bind(this)()).toFixed(1)}%
                           Total: ${d[this.props.y].toFixed(2)} kW
                           Peak: ${d.max.toFixed(2)} kW

@@ -35,9 +35,10 @@ export class Graph_LineBrushAll extends React.Component {
   }
 
   renderGraph() {
-console.log(this.props.data)
+    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block', height: '80%', width: '100%' };
+
     return (
-            <Card.Content>
+        <Card style={divStyle}>
                 <VictoryChart height={410} scale={{ x: 'time' }}
                               containerComponent={
                                 <VictoryZoomContainer
@@ -49,17 +50,25 @@ console.log(this.props.data)
                 >
                   <VictoryAxis
                       fixLabelOverlap={true}
+                      style={{
+                        ticks: { fill: '#fff' },
+                        tickLabels: { fill: '#fff' },
+                      }}
                   />
-                  <VictoryAxis dependentAxis crossAxis
-                               standalone={false}
+                  <VictoryAxis dependentAxis
+                               fixLabelOverlap={true}
+                               style={{
+                                 ticks: { fill: '#fff' },
+                                 tickLabels: { fill: '#fff' },
+                               }}
                   />
                   <VictoryLine
                       style={{
-                        data: { stroke: '#c43a31', strokeWidth: 0.2 },
+                        data: { stroke: '#ccff00', strokeWidth: 0.5 },
                         parent: { border: '1px solid #5E7480' },
-                        labels: {
-                          fontSize: 50,
-                        },
+                        // labels: {
+                        //   fontSize: 50,
+                        // },
                       }}
                       animate={{
                         duration: 2000,
@@ -88,18 +97,19 @@ console.log(this.props.data)
                   />
                   <VictoryLine
                       style={{
-                        data: { stroke: '#c43a31', strokeWidth: 0.2 },
+                        data: { stroke: '#ccff00', strokeWidth: 0.5 },
                         parent: { border: '1px solid #5E7480' },
-                        labels: {
-                          fontSize: 50,
-                        },
+                        // labels: {
+                        //   fontSize: 50,
+                        // },
                       }}
                       data={this.props.data }
                       x={this.props.x}
                       y={this.props.y}
                   />
                 </VictoryChart>
-            </Card.Content>
+
+        </Card>
     );
   }
 }

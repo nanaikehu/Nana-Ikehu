@@ -89,7 +89,7 @@ return filtered;
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
+    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block'};
     return (
         <Card style={divStyle} fluid>
           <Card.Content>
