@@ -3,6 +3,7 @@ import { Dropdown, Loader, Card, Grid, Container } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
 import { Meteor } from "meteor/meteor";
 import MeterTextSum from './MeterTextSum'
+import { Graph_LineBrush } from './Graph_LineBrush';
 
 export default class Building extends React.Component {
 
@@ -13,6 +14,7 @@ export default class Building extends React.Component {
     this.onBuilding = this.onBuilding.bind(this)
     this.DropdownMeterList = this.DropdownMeterList.bind(this)
     this.meterSelected = this.meterSelected.bind(this)
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
 
     if(this.props.build){
       this.state.build = this.props.build;
@@ -23,6 +25,25 @@ export default class Building extends React.Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+
+    if (this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
+      let self = this;
+      this.setState({dateStart : this.props.dateStart})
+      this.setState({dateEnd : this.props.dateEnd})
+      this.setState({data : ''})
+      Meteor.call("getBuildings", (error, response) => {
+        if (error) {
+          console.log('Building' + error)
+        } else {
+          console.log("res+ build ")
+          console.log(response)
+          self.setState({ data: response});
+        }
+      });
+    }
+  }
 
   componentWillMount() {
     const self = this;
@@ -74,6 +95,7 @@ export default class Building extends React.Component {
       }
     }
     console.log(this.state.dateStart)
+    console.log(this.state.dateEnd)
   }
 
 
@@ -99,8 +121,8 @@ export default class Building extends React.Component {
     return (
         <div style={pad}>
             { (this.state.build) ? this.DropdownMeterList() : '' }
-          <Container height={'80%'}>
-            <Card.Group itemsPerRow={1} >
+          <Container>
+            <Card.Group >
               { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
             </Card.Group>
           </Container>
