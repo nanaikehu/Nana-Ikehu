@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'semantic-ui-react';
+import { Image, Container } from 'semantic-ui-react';
 
 
 
@@ -11,7 +11,16 @@ class Landing extends React.Component {
   render() {
 
     return (
-        <Image src={'/images/landing.jpg'} fluid/>
+        <Container fluid>
+          <Image src='/images/landing.jpg' className='landing-background'/>
+          <div className='landing-text'>
+            <h1>Nānā Ikehu</h1>
+            <h2>Visualize Energy</h2>
+            <div>
+              <a href='#'>View Project</a>
+            </div>
+          </div>
+        </Container>
 
     );
   }

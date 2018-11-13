@@ -9,10 +9,10 @@ import { Roles } from 'meteor/alanning:roles';
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '0px', backgroundColor: '#383b4a'};
+    const menuStyle = { marginBottom: '0px', backgroundColor: '#383b4a' };
     const itemStyle = { fontSize: "20px", color: 'white'};
     return (
-        <Menu centered borderless className="topmenu" style={menuStyle}>
+        <Menu borderless fluid className="topmenu" style={menuStyle}>
           <Container>
             <Grid centered>
               <Menu.Item><Image size='tiny' src="/images/nana.png"/></Menu.Item>
@@ -21,8 +21,8 @@ class NavBar extends React.Component {
             </Menu.Item>
             </Grid>
             <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/sumdate" key='upload'>Summary</Menu.Item>
-            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
-            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/map" key='upload'>Map</Menu.Item>
+            <Menu.Item style={itemStyle} as={NavLink} activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
+            <Menu.Item style={itemStyle}  as={NavLink} activeClassName="active" exact to="/map" key='upload'>Map</Menu.Item>
           </Container>
 
         </Menu>
