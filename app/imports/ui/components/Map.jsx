@@ -7,6 +7,7 @@ import defaultBuilding from '../../api/building_db/buildingCoor'
 import { Link } from 'react-router-dom';
 import BuildingForMap from './BuildingForMap'
 import Calendar from 'react-calendar';
+import { _ } from 'meteor/underscore';
 
 
 
@@ -39,7 +40,7 @@ export default class Map1 extends Component {
         } else {
           console.log("res + for ID " + this.state.meterId)
 
-          console.log(response)
+          console.log('data from map' + response)
 
           self.setState({ data : response });
         }
@@ -55,9 +56,13 @@ export default class Map1 extends Component {
       } else {
 
         console.log(response)
-        self.setState({ data : response });
+        self.setState({ data : response })
       }
     });
+  }
+
+  combineDada(){
+    _.map(defaultBuilding, e => {})
   }
 
   render()
@@ -74,18 +79,15 @@ export default class Map1 extends Component {
               <Grid.Column style={style}><Calendar style={{border: 'none'}} className='datePicker'
                           value={this.state.dateStart}
                           onChange={this.startChange} /></Grid.Column>
-            <Grid.Column style={style}><Header inverted>Change to Heat Map</Header></Grid.Column>
+            <Grid.Column style={style}>
+              <Header inverted>Change to Heat Map</Header>
+              <p/>
+          <Button onClick={this.open}>Show</Button>
+          <Confirm open={this.state.open} onCancel={this.close} onConfirm={this.close} />
+            </Grid.Column>
               <Grid.Column style={style}><Calendar className='datePicker' style={pickerColor}
                           value={this.state.dateEnd}
                           onChange={this.endChange} /></Grid.Column>
-          </Grid.Row>
-            <Grid.Row>
-          <Button onClick={this.open}>Show</Button>
-          <Confirm open={this.state.open} onCancel={this.close} onConfirm={this.close} />
-            </Grid.Row>
-          <Grid.Row>
-            <Grid.Column style={pad1}>
-            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
           <Container>
