@@ -95,7 +95,7 @@ a {
   /*width: 50%;*/
   text-align: left;
   width: 50%;
-  margin-right: 4rem;
+  /*margin-right: 4rem;*/
   position: absolute;
   right: 0;
 }
@@ -127,6 +127,24 @@ a {
   font-size: 1rem;
   line-height: 1.6;
   width: 70%;
+}
+
+.landing-data{
+  min-height: 100vh;
+  background-color:#0c121f;
+  position: relative;
+}
+
+.landing-data > .text{
+  /*width: 50%;*/
+  text-align: left;
+  width: 50%;
+  margin-left: 12rem;
+}
+
+.ui.floated.image, .ui.floated.images{
+  /*position: relative;*/
+  margin-top:10%;
 }
 
 /*.topmenu{*/
