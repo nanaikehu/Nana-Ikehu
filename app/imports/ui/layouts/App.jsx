@@ -1,13 +1,12 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.css';
-import { Roles } from 'meteor/alanning:roles';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Landing from '../pages/Landing';
 import NotFound from '../pages/NotFound';
-import Upload from '../pages/Upload'
+import Upload from '../pages/Upload';
 import Debug from '../pages/Debug';
-import  Building  from '../pages/Building';
+import Building from '../pages/Building';
 import ListMap from '../pages/ListMap';
 import SumDate from '../pages/SumDate';
 
@@ -33,7 +32,5 @@ class App extends React.Component {
     );
   }
 }
-
-
 
 export default App;

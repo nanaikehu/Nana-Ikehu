@@ -26,6 +26,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "no-param-reassign": 0,
     "arrow-parens": "off",
     "camelcase": "off",
     "class-methods-use-this": "off",
