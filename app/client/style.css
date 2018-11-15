@@ -75,14 +75,39 @@ a {
 
 .landing-about > .text{
   /*width: 50%;*/
-  line-height: 1.6;
-  text-align: center;
+  text-align: left;
+  width: 50%;
+  margin-left: 12rem;
 }
 
-.landing-data{
+.ui.floated.image, .ui.floated.images{
+  /*position: relative;*/
+  margin-top:10%;
+}
+
+.landing-graphs{
   min-height: 100vh;
-  background-color:#fff;
+  background-color:#0c121f;
   position: relative;
+}
+
+.landing-graphs > .text{
+  /*width: 50%;*/
+  text-align: left;
+  width: 50%;
+  margin-right: 4rem;
+  position: absolute;
+  right: 0;
+}
+
+.graph-icons {
+  position: absolute;
+  top: 40%;
+  margin-left: 4rem;
+}
+
+.graph-icons > i.icon {
+  margin-left: 2rem;
 }
 
 .text{
@@ -96,14 +121,13 @@ a {
   font-size: 3rem;
   letter-spacing: 1rem;
   text-transform: uppercase;
-  text-align: center;
 }
 
 .text > p{
   font-size: 1rem;
-  text-align: center;
+  line-height: 1.6;
+  width: 70%;
 }
-
 
 /*.topmenu{*/
   /*position: fixed;*/
