@@ -12,13 +12,19 @@ class Landing extends React.Component {
 
     return (
         <Container fluid>
-          <Image src='/images/landing.jpg' className='landing-background'/>
-          <div className='landing-text'>
-            <h1>Nānā Ikehu</h1>
-            <h2>Visualize Energy</h2>
-            <div>
-              <a href='#'>View Project</a>
+          {/*<Image src='/images/landing.jpg' className='landing-background'/>*/}
+          <div className='landing'>
+            <div className='landing-background'></div>
+            <div className='landing-text'>
+              <h1>Nānā Ikehu</h1>
+              <h2>Visualize Energy</h2>
+              <div>
+                <a href='#'>View Project</a>
+              </div>
             </div>
+          </div>
+          <div className='landing-about'>
+
           </div>
         </Container>
 

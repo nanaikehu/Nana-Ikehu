@@ -3,10 +3,16 @@ a {
   text-decoration: underline;
 }
 
+
+/*.ui.image.landing-background{*/
+  /*opacity: 0.5;*/
+/*}*/
+
 .landing-background{
-  /*background:url('/images/landing.jpg') no-repeat center center fixed;*/
-  /*background-size: cover;*/
+  background:url('/images/landing.jpg') no-repeat center center fixed;
+  background-size: cover;
   min-height: 100vh;
+  width: 100%;
   position: relative;
   opacity: 0.5;
 }
@@ -15,11 +21,12 @@ a {
 .landing-text{
   color: white;
   text-transform: uppercase;
+  min-height: 100vh;
   /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 }
 
 .landing-text > h1{
@@ -53,11 +60,16 @@ a {
 }
 
 .landing-text > div > a:hover {
-  background-color: #bababa;
+  background-color: #808080;
   padding: 1rem;
   -webkit-transition: background-color 500ms linear;
   -ms-transition: background-color 500ms linear;
   transition: background-color 500ms linear;
+}
+
+.landing-about{
+  min-height: 100vh;
+  background-color:#0c121f;
 }
 
 
