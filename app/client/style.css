@@ -3,6 +3,10 @@ a {
   text-decoration: underline;
 }
 
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+
 
 /*.ui.image.landing-background{*/
   /*opacity: 0.5;*/
@@ -81,7 +85,7 @@ a {
 }
 
 .ui.floated.image, .ui.floated.images{
-  /*position: relative;*/
+  position: relative;
   margin-top:10%;
 }
 
@@ -142,11 +146,6 @@ a {
   margin-left: 12rem;
 }
 
-.ui.floated.image, .ui.floated.images{
-  /*position: relative;*/
-  margin-top:10%;
-}
-
 /*.topmenu{*/
   /*position: fixed;*/
   /*top: 0;*/
@@ -155,6 +154,7 @@ a {
   background-color: #0c121f;
   position: relative;
   min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .ui.fluid.search.selection.dropdown{
@@ -238,13 +238,3 @@ a {
     /*background-position: 0% 50%*/
   /*}*/
 /*}*/
-
-h6 {
-  font-family: 'Open Sans';
-  font-weight: 300;
-  text-align: center;
-  position: absolute;
-  top: 45%;
-  right: 0;
-  left: 0;
-}
