@@ -24,7 +24,16 @@ class Landing extends React.Component {
             </div>
           </div>
           <div className='landing-about'>
-
+            <div className='text'>
+              <h1>Welcome to Nānā Ikehu</h1>
+              <p>Nānā Ikehu visualizes energy usage throughout the University of Hawaii campus through the use of graphs and maps. Users are able to see the amount of energy used for each building by either clicking a building on the campus map, or by selecting a building through the drop down menu.</p>
+            </div>
+          </div>
+          <div className='landing-data'>
+            <div className='text'>
+              <h1>Welcome to Nānā Ikehu</h1>
+              <p>This app visualizes energy usage throughout the University of Hawaii campus through the use of graphs and maps. Users are able to see the amount of energy used for each building by either clicking a building on the campus map, or by selecting a building through the drop down menu.</p>
+            </div>
           </div>
         </Container>
 

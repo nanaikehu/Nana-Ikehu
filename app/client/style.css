@@ -13,7 +13,7 @@ a {
   background-size: cover;
   min-height: 100vh;
   width: 100%;
-  position: relative;
+  position: absolute;
   opacity: 0.5;
 }
 
@@ -23,10 +23,10 @@ a {
   text-transform: uppercase;
   min-height: 100vh;
   /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, 40%);
 }
 
 .landing-text > h1{
@@ -70,6 +70,38 @@ a {
 .landing-about{
   min-height: 100vh;
   background-color:#0c121f;
+  position: relative;
+}
+
+.landing-about > .text{
+  /*width: 50%;*/
+  line-height: 1.6;
+  text-align: center;
+}
+
+.landing-data{
+  min-height: 100vh;
+  background-color:#fff;
+  position: relative;
+}
+
+.text{
+  color: white;
+  /*text-transform: uppercase;*/
+  position: absolute;
+  top: 40%;
+}
+
+.text > h1{
+  font-size: 3rem;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.text > p{
+  font-size: 1rem;
+  text-align: center;
 }
 
 
