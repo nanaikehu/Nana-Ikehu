@@ -3,6 +3,10 @@ a {
   text-decoration: underline;
 }
 
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+
 
 /*.ui.image.landing-background{*/
   /*opacity: 0.5;*/
@@ -75,14 +79,39 @@ a {
 
 .landing-about > .text{
   /*width: 50%;*/
-  line-height: 1.6;
-  text-align: center;
+  text-align: left;
+  width: 50%;
+  margin-left: 12rem;
 }
 
-.landing-data{
-  min-height: 100vh;
-  background-color:#fff;
+.ui.floated.image, .ui.floated.images{
   position: relative;
+  margin-top:10%;
+}
+
+.landing-graphs{
+  min-height: 100vh;
+  background-color:#0c121f;
+  position: relative;
+}
+
+.landing-graphs > .text{
+  /*width: 50%;*/
+  text-align: left;
+  width: 50%;
+  /*margin-right: 4rem;*/
+  position: absolute;
+  right: 0;
+}
+
+.graph-icons {
+  position: absolute;
+  top: 40%;
+  margin-left: 4rem;
+}
+
+.graph-icons > i.icon {
+  margin-left: 2rem;
 }
 
 .text{
@@ -96,14 +125,26 @@ a {
   font-size: 3rem;
   letter-spacing: 1rem;
   text-transform: uppercase;
-  text-align: center;
 }
 
 .text > p{
   font-size: 1rem;
-  text-align: center;
+  line-height: 1.6;
+  width: 70%;
 }
 
+.landing-data{
+  min-height: 100vh;
+  background-color:#0c121f;
+  position: relative;
+}
+
+.landing-data > .text{
+  /*width: 50%;*/
+  text-align: left;
+  width: 50%;
+  margin-left: 12rem;
+}
 
 /*.topmenu{*/
   /*position: fixed;*/
@@ -113,6 +154,7 @@ a {
   background-color: #0c121f;
   position: relative;
   min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .ui.fluid.search.selection.dropdown{
@@ -196,13 +238,3 @@ a {
     /*background-position: 0% 50%*/
   /*}*/
 /*}*/
-
-h6 {
-  font-family: 'Open Sans';
-  font-weight: 300;
-  text-align: center;
-  position: absolute;
-  top: 45%;
-  right: 0;
-  left: 0;
-}
