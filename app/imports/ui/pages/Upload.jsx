@@ -1,23 +1,23 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import Papa from 'papaparse'
-import { _ } from 'meteor/underscore'
-import { Meteor } from "meteor/meteor";
-import '../../api/building_db'
-import { withTracker } from 'meteor/react-meteor-data';
-
+import Papa from 'papaparse';
+import { _ } from 'meteor/underscore';
+import '../../api/building_db';
 
 /** A simple static component to render some text for the landing page. */
 class Upload extends React.Component {
 
   constructor(props) {
 
-
-
     super(props);
     this.csvParsed = {};
     this.keys = {};
-    this.buildList = ["Date","AG_ENGINEERING_MAIN_MTR", "AG_ENGINEERING_MCC_MTR", "AG_SCIENCE_MCC_MTR", "ARCHTECTURE_MAIN_MTR", "BACHMAN_HALL_MAIN_MTR", "BIOMEDICAL_SCIENCE_CH_1_MTR", "BIOMEDICAL_SCIENCE_CH_2_MTR", "BIOMEDICAL_SCIENCE_MAIN_A_MTR", "BIOMEDICAL_SCIENCE_MAIN_B_MTR", "BIOMEDICAL_SCIENCE_MCC_A_MTR", "BUS_AD_SHIDLER_MAIN_MTR", "KOREAN_STUDIES_MAIN_MTR"]
+    this.buildList = ['Date', 'AG_ENGINEERING_MAIN_MTR',
+      'AG_ENGINEERING_MCC_MTR', 'AG_SCIENCE_MCC_MTR', 'ARCHTECTURE_MAIN_MTR',
+      'BACHMAN_HALL_MAIN_MTR', 'BIOMEDICAL_SCIENCE_CH_1_MTR', 'BIOMEDICAL_SCIENCE_CH_2_MTR',
+      'BIOMEDICAL_SCIENCE_MAIN_A_MTR', 'BIOMEDICAL_SCIENCE_MAIN_B_MTR', 'BIOMEDICAL_SCIENCE_MCC_A_MTR',
+      'BUS_AD_SHIDLER_MAIN_MTR', 'KOREAN_STUDIES_MAIN_MTR'];
     // Ensure that 'this' is bound to this component in these two functions.
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.readSingleFile = this.readSingleFile.bind(this);
@@ -27,14 +27,14 @@ class Upload extends React.Component {
 
   readSingleFile(e) {
     console.log(sample.find().fetch());
-    let file = e.target.files[0];
+    const file = e.target.files[0];
     if (!file) {
       return;
     }
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      var contents = e.target.result;
-      var element = document.getElementById('file-content');
+    const reader = new FileReader();
+    reader.onload = function () {
+      const contents = e.target.result;
+      const element = document.getElementById('file-content');
       element.textContent = contents;
       this.csvParsed = Papa.parse(contents, { header: true }).data;
       this.keys = _.keys(this.csvParsed);
@@ -44,7 +44,7 @@ class Upload extends React.Component {
   }
 
   promptHeaders() {
-    //This should prompt the user with this.keys to select the building and the date
+    // This should prompt the user with this.keys to select the building and the date
   }
 
   render() {
@@ -61,6 +61,5 @@ class Upload extends React.Component {
     );
   }
 }
-
 
 export default Upload;

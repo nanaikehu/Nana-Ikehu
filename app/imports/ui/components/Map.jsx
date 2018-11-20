@@ -58,6 +58,7 @@ export default class Map1 extends Component {
               {
                 defaultBuilding.map(item => {
                   const x = { lat: item.coor[0], lon: item.coor[1] };
+// eslint-disable-next-line react/jsx-key
                   return <Marker position={x}>
                     <Popup minWidth={350}>
                       <BuildingForMap build={item.code} dateStart={this.state.dateStart} dateEnd={this.state.dateEnd}/>

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Dropdown, Loader, Card, Grid, Container, Image } from 'semantic-ui-react';
+import { Dropdown, Loader, Card, Grid, Container } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 import DatePicker from 'react-date-picker';
+import PropTypes from 'prop-types';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import MeterTextSum from '../components/MeterTextSum';
 
 export default class Building extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     const today = new Date();
     const priorDate = new Date().setDate(today.getDate() - 30);
     this.state = { data: '', dateStart: new Date(priorDate), dateEnd: today, meter: '' };
@@ -20,26 +21,29 @@ export default class Building extends React.Component {
     this.endChange = this.endChange.bind(this);
     this.startChange = this.startChange.bind(this);
 
-    if (this.props.match.params.code){
+    if (this.props.match.params.code) {
       this.state.build = this.props.match.params.code;
     }
 
   }
 
-  endChange = date => {this.setState({ dateEnd: date }); console.log(this.state)};
+  endChange = date => {
+    this.setState({ dateEnd: date });
+    console.log(this.state);
+  };
+
   startChange = date => this.setState({ dateStart: date });
 
   componentWillMount() {
     const self = this;
-    Meteor.call("getBuildings", (error, response) => {
+    Meteor.call('getBuildings', (error, response) => {
       if (error) {
-        console.log('Building' + error);
+        console.log(`Building${error}`);
       } else {
-        console.log("res+ build ");
+        console.log('res+ build ');
         console.log(response);
 
-          self.setState({ data: response});
-
+        self.setState({ data: response });
 
       }
     });
@@ -53,13 +57,15 @@ export default class Building extends React.Component {
         key: build.code,
         value: build.code,
         text: build.name,
-      }
+
+      };
       selection.push(x);
-    })
+    });
 
     return selection;
   }
 
+// eslint-disable-next-line consistent-return
   DropdownMeterList() {
     if (this.state.build) {
       console.log(this.state.data);
@@ -69,84 +75,91 @@ export default class Building extends React.Component {
       _.forEach(selected.meters, build => {
         const x = {
           key: build.id,
-          value: build.id + '' + build.unit + '' + build.name,
-          text: build.unit + '' + build.name,
-        }
+          value: `${build.id}${build.unit}${build.name}`,
+          text: `${build.unit}${build.name}`,
+        };
         selection.push(x);
-      })
+      });
       if (this.state.meter === '') {
-      this.setState( {meter : selection[0].key, unit: 'kW'});
+        this.setState({ meter: selection[0].key, unit: 'kW' });
       }
       return (
-          <Dropdown placeholder='Select Meter' fluid search selection options={selection} onChange={this.meterSelected} defaultValue={selection[0].value}/>
+          <Dropdown placeholder='Select Meter' fluid search selection options={selection}
+                    onChange={this.meterSelected} defaultValue={selection[0].value}/>
       );
     }
   }
 
-
   meterSelected(e, name) {
-    const x = name.value.split( '' );
-    this.setState({ meter: parseInt(x[0]), unit: x[1]});
- }
+    const x = name.value.split('');
+    this.setState({ meter: parseInt(x[0], 10), unit: x[1] });
+  }
 
   render() {
-
     return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
   }
 
   onBuilding(e, name) {
     this.setState({ build: name.value });
-    console.log('build ID: ' + name.value);
+    console.log(`build ID: ${name.value}`);
   }
 
   renderGraph() {
-    const pad = {marginTop : '4em'};
-    const barpad = {marginBottom : '8px'};
+    const pad = { marginTop: '4em' };
+    const barpad = { marginBottom: '8px' };
     const pickerColor = { color: '#fff' };
     const style = { textAlign: 'center' };
     return (
         <Container fluid>
           <div className='building-bg'>
-        <div style={pad}>
-          <Grid columns={2} centered>
+            <div style={pad}>
+              <Grid columns={2} centered>
 
-            <Grid.Row>
-              <Grid.Column style={style}>
-                <DatePicker className='datePicker' style={{border: 'none'}}
-                    name="dateStart"
-                    placeholder="Start"
-                    value={this.state.dateStart}
-                    onChange={this.startChange} />
-              </Grid.Column>
-              <Grid.Column style={style}>
-                <DatePicker className='datePicker' style={pickerColor}
-                    name="dateEnd"
-                    placeholder="End"
-                    value={this.state.dateEnd}
-                    onChange={this.endChange} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Column style={barpad}>
-              <Grid.Row>
-          <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                    onChange={this.onBuilding} value={this.state.build}/></Grid.Row>
-              <Grid.Row >
-          { (this.state.build) ? this.DropdownMeterList() : '' }
-              </Grid.Row>
-            </Grid.Column>
+                <Grid.Row>
+                  <Grid.Column style={style}>
+                    <DatePicker className='datePicker' style={{ border: 'none' }}
+                                name="dateStart"
+                                placeholder="Start"
+                                value={this.state.dateStart}
+                                onChange={this.startChange}/>
+                  </Grid.Column>
+                  <Grid.Column style={style}>
+                    <DatePicker className='datePicker' style={pickerColor}
+                                name="dateEnd"
+                                placeholder="End"
+                                value={this.state.dateEnd}
+                                onChange={this.endChange}/>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Column style={barpad}>
+                  <Grid.Row>
+                    <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
+                              onChange={this.onBuilding} value={this.state.build}/></Grid.Row>
+                  <Grid.Row>
+                    {(this.state.build) ? this.DropdownMeterList() : ''}
+                  </Grid.Row>
+                </Grid.Column>
 
-          </Grid>
-          <Container height={'80%'}>
-          <Card.Group itemsPerRow={1} >
-            { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
-            { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }
-          </Card.Group>
-          </Container>
-        </div>
-        </div>
+              </Grid>
+              <Container height={'80%'}>
+                <Card.Group itemsPerRow={1}>
+                  {(this.state.meter) && <MeterTextSum meterId={this.state.meter}
+                                                       dateStart={this.state.dateStart.toString()}
+                                                       dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
+                  {(this.state.meter) && <Graph_LineBrush
+                      meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()}
+                      dateEnd={this.state.dateEnd.toString()}/>}
+                </Card.Group>
+              </Container>
+            </div>
+          </div>
         </Container>
     );
   }
 
 }
 
+Building.propTypes = {
+  match: PropTypes.shape,
+  params: PropTypes.shape,
+};
