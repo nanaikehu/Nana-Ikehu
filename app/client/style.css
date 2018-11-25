@@ -7,11 +7,6 @@ h1, h2 {
   font-family: 'Montserrat', sans-serif;
 }
 
-
-/*.ui.image.landing-background{*/
-  /*opacity: 0.5;*/
-/*}*/
-
 .landing-background{
   opacity: 0.3;
   background-size: cover;
@@ -37,17 +32,10 @@ h1, h2 {
   background:url('/images/landing4.jpg') no-repeat center center fixed;
 }
 
-.image-container{
-  position: absolute;
-  left: 50%;
-  top: 15%;
-}
-
 .landing-text{
   color: white;
   text-transform: uppercase;
   min-height: 100vh;
-  /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
   position: relative;
   top: 50%;
   left: 50%;
@@ -65,11 +53,11 @@ h1, h2 {
   text-align: center;
   letter-spacing: 1rem;
 }
+
 .landing-text > div {
   font-size: 1rem;
   text-decoration: none;
   text-align: center;
-  /*background-color: black;*/
   margin-top: 2rem;
   padding: 1rem;
 }
@@ -95,51 +83,29 @@ h1, h2 {
 .landing-about{
   min-height: 100vh;
   background-color:#0c121f;
-  position: relative;
 }
 
-.landing-about > .text{
-  /*width: 50%;*/
-  text-align: left;
-  width: 50%;
-  margin-left: 12rem;
-}
-
-.ui.floated.image, .ui.floated.images{
-  position: relative;
-  margin-top:10%;
+.landing-data{
+  min-height: 100vh;
+  background-color:#0c121f;
 }
 
 .landing-graphs{
   min-height: 100vh;
   background-color:#0c121f;
-  position: relative;
 }
 
-.landing-graphs > .text{
-  /*width: 50%;*/
+.ui.centered.middle.aligned.two.column.grid > .row{
   text-align: left;
-  width: 50%;
-  /*margin-right: 4rem;*/
-  position: absolute;
-  right: 0;
+  padding: 5rem;
 }
 
-.graph-icons {
-  position: absolute;
-  top: 40%;
-  margin-left: 4rem;
-}
-
-.graph-icons > i.icon {
-  margin-left: 2rem;
+.ui.centered.middle.aligned.two.column.grid{
+  min-height: 100vh;
 }
 
 .text{
   color: white;
-  /*text-transform: uppercase;*/
-  position: absolute;
-  top: 30%;
 }
 
 .text > h1{
@@ -149,28 +115,10 @@ h1, h2 {
 }
 
 .text > p{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.6;
-  width: 70%;
 }
 
-.landing-data{
-  min-height: 100vh;
-  background-color:#0c121f;
-  position: relative;
-}
-
-.landing-data > .text{
-  /*width: 50%;*/
-  text-align: left;
-  width: 50%;
-  margin-left: 12rem;
-}
-
-/*.topmenu{*/
-  /*position: fixed;*/
-  /*top: 0;*/
-/*}*/
 .app{
   background-color: #0c121f;
   position: relative;
@@ -212,50 +160,11 @@ h1, h2 {
   color:white !important;
 }
 
-/*.ui.cards > .card > .content, .ui.card > .content{*/
-  /*background-color: #383b4a;*/
-/*}*/
-.footer{
-  position:absolute;
-  left:0;
-  bottom:0;
-  right:0;
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
   overflow: auto;
   display: inline-block;
 }
-
-/*@-webkit-keyframes Gradient {*/
-  /*0% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-  /*50% {*/
-    /*background-position: 100% 50%*/
-  /*}*/
-  /*100% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-/*}*/
-
-/*@-moz-keyframes Gradient {*/
-  /*0% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-  /*50% {*/
-    /*background-position: 100% 50%*/
-  /*}*/
-  /*100% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-/*}*/
-
-/*@keyframes Gradient {*/
-  /*0% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-  /*50% {*/
-    /*background-position: 100% 50%*/
-  /*}*/
-  /*100% {*/
-    /*background-position: 0% 50%*/
-  /*}*/
-/*}*/
