@@ -110,40 +110,44 @@ export default class Building extends React.Component {
     return (
         <div style={pad}>
           <Grid columns={2} centered>
-
             <Grid.Row>
               <Grid.Column style={style}>
-                <DatePicker className='datePicker' style={{border: 'none'}}
+                <DatePicker
+                    className='datePicker'
+                    style={{border: 'none'}}
                     name="dateStart"
                     placeholder="Start"
                     value={this.state.dateStart}
-                    onChange={this.startChange} />
+                    onChange={this.startChange}
+                />
               </Grid.Column>
               <Grid.Column style={style}>
-                <DatePicker className='datePicker' style={pickerColor}
+                <DatePicker
+                    className='datePicker'
+                    style={pickerColor}
                     name="dateEnd"
                     placeholder="End"
                     value={this.state.dateEnd}
-                    onChange={this.endChange} />
+                    onChange={this.endChange}
+                />
               </Grid.Column>
             </Grid.Row>
             <Grid.Column style={barpad}>
               <Grid.Row>
-          <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                    onChange={this.onBuilding} value={this.state.build}/></Grid.Row>
+                <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
+                    onChange={this.onBuilding} value={this.state.build}/>
+              </Grid.Row>
               <Grid.Row >
-          { (this.state.build) ? this.DropdownMeterList() : '' }
+                { (this.state.build) ? this.DropdownMeterList() : '' }
               </Grid.Row>
             </Grid.Column>
-
           </Grid>
           <Container height={'80%'}>
-          <Card.Group itemsPerRow={1} >
+            <Card.Group itemsPerRow={1} >
             { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
             { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }
-          </Card.Group>
+            </Card.Group>
           </Container>
-
         </div>
     );
   }

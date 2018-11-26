@@ -83,16 +83,19 @@ h1, h2 {
 .landing-about{
   min-height: 100vh;
   background-color:#0c121f;
+  overflow: hidden;
 }
 
 .landing-data{
   min-height: 100vh;
   background-color:#0c121f;
+  overflow: hidden;
 }
 
 .landing-graphs{
   min-height: 100vh;
   background-color:#0c121f;
+  overflow: hidden;
 }
 
 .ui.centered.middle.aligned.two.column.grid > .row{
