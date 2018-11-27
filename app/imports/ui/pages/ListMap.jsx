@@ -8,7 +8,7 @@ import Calendar from "react-calendar";
 class ListMap extends React.Component {
     constructor(props) {
     super(props)
-    let today = new Date()
+    let today = new Date('2018/11/01')
     let priorDate = new Date().setDate(today.getDate()-30)
     this.state = { open: false, dateStart: new Date(priorDate), dateEnd: new Date(today)};
     this.endChange = this.endChange.bind(this)
