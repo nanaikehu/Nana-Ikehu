@@ -12,6 +12,7 @@ export default class Map1 extends Component {
   constructor(props) {
     super(props);
     const today = new Date(2018, 9, 31);
+// eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
     const maxDate = new Date(2018, 9, 1);
     this.state = { marker: this.props.marker, dateStart: new Date(maxDate), dateEnd: new Date(today) };
@@ -35,6 +36,7 @@ export default class Map1 extends Component {
       borderRadius: '6rem',
       padding: '.5rem',
     };
+// eslint-disable-next-line no-unused-vars
     const style = { textAlign: 'center' };
     const pad = { marginTop: '4em' };
 
@@ -75,7 +77,7 @@ export default class Map1 extends Component {
                 {
                   defaultBuilding.map(item => {
                         const x = { lat: item.coor[0], lon: item.coor[1] };
-                        return <Marker position={x}>
+                        return <Marker key = {x} position={x}>
                           <Popup minWidth={350}>
                             <BuildingForMap build={item.code} dateStart={this.state.dateStart}
                                             dateEnd={this.state.dateEnd}/>

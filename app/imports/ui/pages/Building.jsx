@@ -13,6 +13,7 @@ export default class Building extends React.Component {
     super(props);
     const today = new Date(2018, 9, 31);
     /* exported priorDate */
+// eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
     const maxDate = new Date(2018, 9, 1);
     this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
