@@ -3,28 +3,30 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Container, Image, Header, Grid } from 'semantic-ui-react';
+import { Menu, Container, Image, Header } from 'semantic-ui-react';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '0px', backgroundColor: '#383b4a' };
-    const itemStyle = { fontSize: '20px', color: 'white' };
+
+    const menuStyle = { fontFamily: 'Montserrat', backgroundColor: '#383b4a', marginBottom: '0px' };
+    const itemStyle = { fontSize: '1.2rem', color: 'white', paddingTop: '0px', paddingBottom: '0px' };
+
     return (
         <Menu borderless fluid className="topmenu" style={menuStyle}>
           <Container>
-            <Grid centered>
-              <Menu.Item><Image size='tiny' src="/images/nana.png"/></Menu.Item>
-              <Menu.Item as={NavLink} activeClassName="" exact to="/">
-                <Header inverted as='h1'>Nana Ikehu</Header>
+            <Menu.Item style={{ paddingTop: '0px', paddingBottom: '0px' }}><Image size='tiny'
+                                                                                  src="/images/nana.png"/></Menu.Item>
+            <Menu.Item style={{ paddingTop: '0px', paddingBottom: '0px' }} position="left" as={NavLink}
+                       activeClassName="" exact to="/">
+              <Header style={{ fontFamily: 'Montserrat' }} inverted as='h1'>Nānā Ikehu</Header>
             </Menu.Item>
-            </Grid>
-            <Menu.Item style={itemStyle} position="right" as={NavLink}
-                       activeClassName="active" exact to="/sumdate" key='upload'>Summary</Menu.Item>
-            <Menu.Item style={itemStyle} as={NavLink}
-                       activeClassName="active" exact to="/building" key='upload'>Buildings</Menu.Item>
-            <Menu.Item style={itemStyle} as={NavLink}
-                       activeClassName="active" exact to="/map" key='upload'>Map</Menu.Item>
+            <Menu.Item style={itemStyle} position="right" as={NavLink} activeClassName="active" exact to="/sumdate"
+                       key='upload'>Summary</Menu.Item>
+            <Menu.Item style={itemStyle} as={NavLink} activeClassName="active" exact to="/building"
+                       key='upload'>Buildings</Menu.Item>
+            <Menu.Item style={itemStyle} as={NavLink} activeClassName="active" exact to="/map"
+                       key='upload'>Map</Menu.Item>
           </Container>
 
         </Menu>

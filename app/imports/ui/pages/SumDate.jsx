@@ -42,7 +42,7 @@ class SumDate extends React.Component {
     ];
 
     return (
-        <div className='landing-background' style={{ paddingBottom: '50px' }}>
+        <div style={{ paddingBottom: '50px' }}>
 
           <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
           <div className='grouped'>

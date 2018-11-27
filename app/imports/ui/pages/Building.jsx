@@ -11,9 +11,11 @@ export default class Building extends React.Component {
 
   constructor(props) {
     super(props);
-    const today = new Date();
+    const today = new Date(2018, 9, 31);
+    /* exported priorDate */
     const priorDate = new Date().setDate(today.getDate() - 30);
-    this.state = { data: '', dateStart: new Date(priorDate), dateEnd: today, meter: '' };
+    const maxDate = new Date(2018, 9, 1);
+    this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this);
     this.DropdownMeterList = this.DropdownMeterList.bind(this);
@@ -107,53 +109,63 @@ export default class Building extends React.Component {
   renderGraph() {
     const pad = { marginTop: '4em' };
     const barpad = { marginBottom: '8px' };
-    const pickerColor = { color: '#fff' };
-    const style = { textAlign: 'center' };
+    // const pickerColor = { color: '#fff' }
+    const pickerStyle = {
+      textAlign: 'center',
+      backgroundColor: '#ECF2FF',
+      color: 'black',
+      borderRadius: '6rem',
+      padding: '.5rem',
+    };
     return (
-        <Container fluid>
-          <div className='building-bg'>
-            <div style={pad}>
-              <Grid columns={2} centered>
-
-                <Grid.Row>
-                  <Grid.Column style={style}>
-                    <DatePicker className='datePicker' style={{ border: 'none' }}
-                                name="dateStart"
-                                placeholder="Start"
-                                value={this.state.dateStart}
-                                onChange={this.startChange}/>
-                  </Grid.Column>
-                  <Grid.Column style={style}>
-                    <DatePicker className='datePicker' style={pickerColor}
-                                name="dateEnd"
-                                placeholder="End"
-                                value={this.state.dateEnd}
-                                onChange={this.endChange}/>
-                  </Grid.Column>
-                </Grid.Row>
-                <Grid.Column style={barpad}>
-                  <Grid.Row>
-                    <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                              onChange={this.onBuilding} value={this.state.build}/></Grid.Row>
-                  <Grid.Row>
-                    {(this.state.build) ? this.DropdownMeterList() : ''}
-                  </Grid.Row>
-                </Grid.Column>
-
-              </Grid>
-              <Container height={'80%'}>
-                <Card.Group itemsPerRow={1}>
-                  {(this.state.meter) && <MeterTextSum meterId={this.state.meter}
-                                                       dateStart={this.state.dateStart.toString()}
-                                                       dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
-                  {(this.state.meter) && <Graph_LineBrush
-                      meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()}
-                      dateEnd={this.state.dateEnd.toString()}/>}
-                </Card.Group>
-              </Container>
-            </div>
-          </div>
-        </Container>
+        <div style={pad}>
+          <Grid columns={2} centered>
+            <Grid.Row>
+              <Grid.Column style={pickerStyle}>
+                <div style={{ display: 'inline-block', marginRight: '2rem' }}>
+                  <span>Start Date: </span>
+                  <DatePicker
+                      className='datePicker'
+                      style={{ border: 'none' }}
+                      name="dateStart"
+                      placeholder="Start"
+                      value={this.state.dateStart}
+                      onChange={this.startChange}
+                  />
+                </div>
+                <div style={{ display: 'inline-block', marginLeft: '2rem' }}>
+                  <span>End Date: </span>
+                  <DatePicker
+                      className='datePicker'
+                      name="dateEnd"
+                      placeholder="End"
+                      value={this.state.dateEnd}
+                      onChange={this.endChange}
+                  />
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Column style={barpad}>
+              <Grid.Row>
+                <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
+                          onChange={this.onBuilding} value={this.state.build}/>
+              </Grid.Row>
+              <Grid.Row>
+                {(this.state.build) ? this.DropdownMeterList() : ''}
+              </Grid.Row>
+            </Grid.Column>
+          </Grid>
+          <Container height={'80%'}>
+            <Card.Group itemsPerRow={1}>
+              {(this.state.meter) &&
+              <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()}
+                            dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
+              {(this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'}
+                                                      dateStart={this.state.dateStart.toString()}
+                                                      dateEnd={this.state.dateEnd.toString()}/>}
+            </Card.Group>
+          </Container>
+        </div>
     );
   }
 
