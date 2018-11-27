@@ -33,7 +33,7 @@ export default class Map1 extends Component {
     const position = [21.299677843574493, -157.81743038445714]
     const pickerStyle = { textAlign: 'center', backgroundColor: '#ECF2FF', color: 'black', borderRadius: '6rem', padding: '.5rem'  }
     const style = { textAlign: 'center' }
-    const pad = {marginTop : '4em'}
+    const pad = { paddingTop : '4rem'}
     return (
         <div style={pad}>
           <Grid columns={2} centered>

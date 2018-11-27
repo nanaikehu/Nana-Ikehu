@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Loader } from 'semantic-ui-react';
+import { Card, Loader, Container } from 'semantic-ui-react';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer, VictoryAxis, VictoryBrushContainer } from 'victory';
 import PropTypes from 'prop-types';
 
@@ -89,19 +89,20 @@ return filtered;
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block'};
+    const divStyle = { backgroundColor: '#383b4a'};
     return (
-        <Card style={divStyle} fluid>
+        <Card style={divStyle}>
           <Card.Content>
-            <div>
-              <VictoryChart height={250} scale={{ x: 'time' }}
-                            containerComponent={
-                              <VictoryZoomContainer
-                                  zoomDimension="x"
-                                  zoomDomain={this.state.zoomDomain}
-                                  onZoomDomainChange={this.handleZoom.bind(this)}
-                              />
-                            }
+              <VictoryChart
+                  height={250}
+                  scale={{ x: 'time' }}
+                  containerComponent={
+                    <VictoryZoomContainer
+                        zoomDimension="x"
+                        zoomDomain={this.state.zoomDomain}
+                        onZoomDomainChange={this.handleZoom.bind(this)}
+                    />
+                  }
               >
                 <VictoryAxis
                     fixLabelOverlap={true}
@@ -163,7 +164,6 @@ return filtered;
                     y={this.props.y}
                 />
               </VictoryChart>
-            </div>
           </Card.Content>
         </Card>
     );

@@ -104,7 +104,7 @@ export default class Building extends React.Component {
   }
 
   renderGraph() {
-    let pad = {marginTop : '4em'}
+    let pad = { paddingTop: '4rem', overflow: 'hidden', minHeight: '100vh'}
     let barpad = {marginBottom : '8px'}
     // const pickerColor = { color: '#fff' }
     const pickerStyle = { textAlign: 'center', backgroundColor: '#ECF2FF', color: 'black', borderRadius: '6rem', padding: '.5rem' }
@@ -146,7 +146,7 @@ export default class Building extends React.Component {
               </Grid.Row>
             </Grid.Column>
           </Grid>
-          <Container height={'80%'}>
+          <Container style={{ height: '100%' }}>
             <Card.Group itemsPerRow={1} >
             { (this.state.meter) && <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/> }
             { (this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'} dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/> }

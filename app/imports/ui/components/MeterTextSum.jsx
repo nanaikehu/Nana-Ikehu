@@ -59,16 +59,17 @@ export default class MeterTextSum extends React.Component {
 
 
   renderGraph() {
+    const highlight = { backgroundColor: '#CCFF00', color: 'black', paddingLeft: '0.5rem', paddingRight: '0.5rem', borderRadius: '0.5rem' }
     let data = this.state.data;
     let maxPoint = _.max(data, entry => entry.max);
     let sumPoint = _.pluck(data, 'mean');
     sumPoint = sumPoint.reduce((total,val) => total+val)
 
     return (
-        <Card fluid style={{ color: '#fff', backgroundColor: '#383b4a', border: 'none' }}>
+        <Card fluid style={{ maxHeight: '4rem', color: '#fff', backgroundColor: '#383b4a', border: 'none' }}>
           <Card.Content style={{ textAlign: 'center', border: 'none' }}>
-            Max point: {maxPoint.max + " "  + this.props.unit} on {maxPoint.time.toLocaleString()}<br/>
-            Summation: {sumPoint.toFixed(2) + " " + this.props.unit}<br/>
+            Max point: <span style={ highlight }>{maxPoint.max + " "  + this.props.unit}</span> on <span style={highlight}>{maxPoint.time.toLocaleString()}</span><br/>
+            Summation: <span style={highlight}>{sumPoint.toFixed(2) + " " + this.props.unit}</span><br/>
           </Card.Content>
         </Card>
     )
