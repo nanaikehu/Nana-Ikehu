@@ -10,12 +10,17 @@ class Landing extends React.Component {
         <Container fluid>
 
           <Container fluid className='landing'>
-            <div className='landing-background landing1'></div>
+            <div className='landing-background landing1'>
+              <div className="header-wrapper">
+                <div className="zoominheader">
+                </div>
+              </div>
+            </div>
             <div className='landing-text'>
               <h1>Nānā Ikehu</h1>
               <h2>Visualize Energy</h2>
               <div>
-                <a href='#'>View Project</a>
+                <a href='Building.jsx#/building'>View Project</a>
               </div>
             </div>
           </Container>
@@ -39,7 +44,12 @@ class Landing extends React.Component {
           </Container>
 
           <Container fluid className='landing-graphs'>
-            <div className='landing-background landing3'></div>
+            <div className='landing-background landing3'>
+              <div className="header-wrapper">
+                <div className="zoominheader2">
+                </div>
+              </div>
+            </div>
             <Grid verticalAlign='middle' columns={2} centered>
               <Grid.Row>
                 <Grid.Column className='graph-icons'>
