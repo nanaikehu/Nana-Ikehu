@@ -10,9 +10,10 @@ export default class Building extends React.Component {
 
   constructor(props) {
     super(props)
-    let today = new Date()
+    let today = new Date(2018, 9, 31)
     let priorDate = new Date().setDate(today.getDate()-30)
-    this.state = { data: '',  dateStart: new Date(priorDate),   dateEnd: today, meter:''};
+    let maxDate = new Date(2018, 9, 1)
+    this.state = { data: '',  dateStart: new Date(maxDate),   dateEnd: today, meter:''};
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this)
     this.DropdownMeterList = this.DropdownMeterList.bind(this)
@@ -105,31 +106,34 @@ export default class Building extends React.Component {
   renderGraph() {
     let pad = {marginTop : '4em'}
     let barpad = {marginBottom : '8px'}
-    const pickerColor = { color: '#fff' }
-    const style = { textAlign: 'center' }
+    // const pickerColor = { color: '#fff' }
+    const pickerStyle = { textAlign: 'center', backgroundColor: '#ECF2FF', color: 'black', borderRadius: '6rem', padding: '.5rem' }
     return (
         <div style={pad}>
           <Grid columns={2} centered>
             <Grid.Row>
-              <Grid.Column style={style}>
-                <DatePicker
-                    className='datePicker'
-                    style={{border: 'none'}}
-                    name="dateStart"
-                    placeholder="Start"
-                    value={this.state.dateStart}
-                    onChange={this.startChange}
-                />
-              </Grid.Column>
-              <Grid.Column style={style}>
-                <DatePicker
-                    className='datePicker'
-                    style={pickerColor}
-                    name="dateEnd"
-                    placeholder="End"
-                    value={this.state.dateEnd}
-                    onChange={this.endChange}
-                />
+              <Grid.Column style={ pickerStyle }>
+                <div style={{ display: 'inline-block', marginRight: '2rem' }}>
+                  <span>Start Date: </span>
+                  <DatePicker
+                      className='datePicker'
+                      style={{border: 'none'}}
+                      name="dateStart"
+                      placeholder="Start"
+                      value={this.state.dateStart}
+                      onChange={this.startChange}
+                  />
+                </div>
+                <div style={{ display: 'inline-block', marginLeft: '2rem' }}>
+                  <span>End Date: </span>
+                  <DatePicker
+                      className='datePicker'
+                      name="dateEnd"
+                      placeholder="End"
+                      value={this.state.dateEnd}
+                      onChange={this.endChange}
+                  />
+                </div>
               </Grid.Column>
             </Grid.Row>
             <Grid.Column style={barpad}>

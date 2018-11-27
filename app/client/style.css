@@ -133,35 +133,37 @@ h1, h2 {
   background-color: #383b4a;
 }
 
-.ui.search.dropdown > .text{
-  color: #fff;
-}
-
-.ui.dropdown:not(.button) > .default.text, .ui.default.dropdown:not(.button) > .text{
-  color: #fff;
-}
 
 .ui.selection.dropdown .menu > .item{
-  color: #fff;
+  /*color: #fff;*/
   background-color: #383b4a;
   border-top: none !important;
 }
 
-.datePicker{
-  border-bottom: thin solid white;
+.ui.selection.dropdown .menu > .item:hover{
+  background-color: #A5ABBD;
 }
+
+/*.datePicker{*/
+  /*border-bottom: thin solid black;*/
+/*}*/
 
 .react-date-picker__wrapper{
   border: none !important;
 }
 
-.react-date-picker__inputGroup__input, .react-date-picker__inputGroup__divider{
-  color: white;
-}
+/*.react-date-picker__inputGroup__input, .react-date-picker__inputGroup__divider{*/
+  /*color: white;*/
+/*}*/
 
 .react-date-picker__button:enabled{
   color:white !important;
 }
+
+/*.react-date-picker.react-date-picker--closed.react-date-picker--enabled.datePicker{*/
+  /*background-color: #ECF2FF;*/
+  /*color: black;*/
+/*}*/
 
 .footer {
   position: absolute;
