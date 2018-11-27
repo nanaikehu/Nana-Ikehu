@@ -15,17 +15,12 @@ import { _ } from 'meteor/underscore';
 export default class Map1 extends Component {
   constructor(props) {
     super(props)
-    let today = new Date()
-    let priorDate = new Date().setDate(today.getDate()-30)
-    this.state = { open: false, marker: this.props.marker, dateStart: new Date(priorDate), dateEnd: new Date(today)};
-    this.endChange = this.endChange.bind(this)
-    this.startChange = this.startChange.bind(this)
+    this.state = { data: '', marker: this.props.marker,  dateStart: '',   dateEnd: '', meter:''};
+    this.state.dateStart = this.props.dateStart;
+    this.state.dateEnd = this.props.dateEnd;
 
   }
-  open = () => this.setState({ open: true })
-  close = () => this.setState({ open: false })
-  endChange = date => {this.setState({ dateEnd: date }); console.log(this.state)}
-  startChange = date => this.setState({ dateStart: date })
+
 
 
   componentDidUpdate(prevProps) {
@@ -55,42 +50,31 @@ export default class Map1 extends Component {
         console.log('SimpleLine' + error)
       } else {
 
-        console.log(response)
         self.setState({ data : response })
       }
     });
+
   }
 
   combineDada(){
-    _.map(defaultBuilding, e => {})
+    const data = [_.pluck(defaultBuilding, 'code'), _.pluck(defaultBuilding, 'coor')]
+    defaultBuilding.map( item =>{
+      let x = {lat: item.coor[0], lon: item.coor[1]}
+      return
+
+    }
+
+    )
   }
 
   render()
 {
     const position = [21.299677843574493, -157.81743038445714]
-    const pickerColor = { color: '#fff' }
-    const style = { textAlign: 'center' }
-    const pad = {marginTop : '4em'}
-    const pad1 = {marginTop : '16em'}
+    const data = [_.pluck(defaultBuilding, 'code'), _.pluck(defaultBuilding, 'coor')]
+    console.log(data)
+    console.log(this.state.data)
     return (
 
-        <Grid columns={2} centered>
-          <Grid.Row style={pad} columns={3}>
-              <Grid.Column style={style}><Calendar style={{border: 'none'}} className='datePicker'
-                          value={this.state.dateStart}
-                          onChange={this.startChange} /></Grid.Column>
-            <Grid.Column style={style}>
-              <Header inverted>Change to Heat Map</Header>
-              <p/>
-          <Button onClick={this.open}>Show</Button>
-          <Confirm open={this.state.open} onCancel={this.close} onConfirm={this.close} />
-            </Grid.Column>
-              <Grid.Column style={style}><Calendar className='datePicker' style={pickerColor}
-                          value={this.state.dateEnd}
-                          onChange={this.endChange} /></Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-          <Container>
           <Map center={position} zoom={17} minZoom={'17'} style={{height: '600px'}}>
             <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -111,9 +95,6 @@ export default class Map1 extends Component {
 
             )}
           </Map>
-          </Container>
-          </Grid.Row>
-        </Grid>
     )
   }
 }
