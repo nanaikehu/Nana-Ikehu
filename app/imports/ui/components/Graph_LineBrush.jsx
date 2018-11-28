@@ -90,41 +90,39 @@ export class Graph_LineBrush extends React.Component {
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
+    const divStyle = { backgroundColor: '#383b4a', padding: '0'};
     return (
-        <Card style={divStyle} fluid>
+        <Card style={divStyle}>
           <Card.Content>
-            <div>
-              <VictoryChart height={250} scale={{ x: 'time' }}
-                            containerComponent={
-                              <VictoryZoomContainer
-                                  zoomDimension="x"
-                                  zoomDomain={this.state.zoomDomain}
-                                  onZoomDomainChange={this.handleZoom.bind(this)}
-                              />
-                            }
+              <VictoryChart
+                  height={250}
+                  scale={{ x: 'time' }}
+                  containerComponent={
+                    <VictoryZoomContainer
+                        zoomDimension="x"
+                        zoomDomain={this.state.zoomDomain}
+                        onZoomDomainChange={this.handleZoom.bind(this)}
+                    />
+                  }
               >
                 <VictoryAxis
                     fixLabelOverlap={true}
                     style={{
                       ticks: { fill: '#fff' },
-                      tickLabels: { fill: '#fff' },
+                      tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
+                      axis: {fill: '#fff'},
                     }}
                 />
                 <VictoryAxis dependentAxis
                              fixLabelOverlap={true}
                              style={{
                                ticks: { fill: '#fff' },
-                               tickLabels: { fill: '#fff' },
+                               tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat'  },
                              }}
                 />
                 <VictoryLine
                     style={{
                       data: { stroke: '#ccff00', strokeWidth: 0.5 },
-                      parent: { border: '1px solid #5E7480' },
-                      // labels: {
-                      //   fontSize: 50,
-                      // },
                     }}
                     animate={{
                       duration: 2000,
@@ -166,7 +164,6 @@ export class Graph_LineBrush extends React.Component {
                     y={this.props.y}
                 />
               </VictoryChart>
-            </div>
           </Card.Content>
         </Card>
     );

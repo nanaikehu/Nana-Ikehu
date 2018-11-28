@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Header, Dropdown } from 'semantic-ui-react';
+import { Card, Header,Dropdown, Container } from 'semantic-ui-react';
 import PieDriver from '../components/PieDriver';
 import LineBrushDriver from '../components/LineBrushDriver';
 
@@ -42,16 +42,16 @@ class SumDate extends React.Component {
     ];
 
     return (
-        <div style={{ paddingBottom: '50px' }}>
+        <div style={{ paddingBottom: '4rem', paddingTop: '4rem'}}>
 
-          <Header inverted textAlign={'center'} as='h2'>Energy Dashboard</Header>
-          <div className='grouped'>
-            <Dropdown selection options={dropdown} onChange={this.rangeSelected} value={this.state.picked}/>
-            <Card.Group itemsPerRow={2} style={{ paddingTop: '10px' }}>
-              <LineBrushDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd}/>
-              <PieDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd}/>
-            </Card.Group>
-          </div>
+          <Header inverted textAlign={'center'} as='h2' style={{ fontFamily: 'Montserrat' }}>Energy Dashboard</Header>
+          <Container centered style={{ width: '25%', paddingBottom: '2rem' }}>
+            <Dropdown fluid selection options={dropdown} onChange={this.rangeSelected} value={this.state.picked}/>
+          </Container>
+          <Card.Group itemsPerRow={2}>
+            <LineBrushDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd}/>
+            <PieDriver dateStart={this.state.dateStart} dateEnd={this.state.dateEnd} />
+          </Card.Group>
         </div>
     );
   }

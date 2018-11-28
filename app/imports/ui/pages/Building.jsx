@@ -108,8 +108,8 @@ export default class Building extends React.Component {
   }
 
   renderGraph() {
-    const pad = { marginTop: '4em' };
-    const barpad = { marginBottom: '8px' };
+    let pad = { paddingTop: '4rem', paddingBottom: '4rem', overflow: 'hidden', minHeight: '100vh'}
+    let barpad = {marginBottom : '8px'}
     // const pickerColor = { color: '#fff' }
     const pickerStyle = {
       textAlign: 'center',
@@ -156,7 +156,7 @@ export default class Building extends React.Component {
               </Grid.Row>
             </Grid.Column>
           </Grid>
-          <Container height={'80%'}>
+          <Container style={{ height: '100%' }}>
             <Card.Group itemsPerRow={1}>
               {(this.state.meter) &&
               <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()}

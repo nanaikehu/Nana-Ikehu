@@ -129,7 +129,7 @@ h1, h2 {
   font-family: 'Montserrat', sans-serif;
 }
 
-.ui.fluid.search.selection.dropdown{
+.ui.fluid.search.selection.dropdown, .ui.fluid.selection.dropdown{
   background-color: #383b4a;
 }
 
@@ -158,6 +158,10 @@ h1, h2 {
 
 .react-date-picker__button:enabled{
   color:white !important;
+}
+
+.react-date-picker__calendar, .react-date-picker__calendar--open{
+  z-index: 10000000 !important;
 }
 
 /*.react-date-picker.react-date-picker--closed.react-date-picker--enabled.datePicker{*/
