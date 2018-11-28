@@ -70,5 +70,5 @@ PieDriver.propTypes = {
 
 PieDriver.defaultProps = {
   dateStart: new Date('5/1/2018'),
-  dateEnd: new Date(),
+  dateEnd: new Date()
 };

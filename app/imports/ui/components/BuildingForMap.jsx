@@ -1,9 +1,9 @@
 import React from 'react';
 import { Loader, Card, Container } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
-import { Meteor } from 'meteor/meteor';
-import PropTypes from 'prop-types';
-import MeterTextSum from './MeterTextSum';
+import { Meteor } from "meteor/meteor";
+import MeterTextSum from './MeterTextSum'
+import { Graph_LineBrush } from './Graph_LineBrush';
 
 export default class Building extends React.Component {
 
@@ -11,9 +11,10 @@ export default class Building extends React.Component {
     super(props);
     this.state = { data: '', dateStart: '', dateEnd: '', meter: '' };
     this.DropdownList = this.DropdownList.bind(this);
-    this.onBuilding = this.onBuilding.bind(this);
-    this.DropdownMeterList = this.DropdownMeterList.bind(this);
-    this.meterSelected = this.meterSelected.bind(this);
+    this.onBuilding = this.onBuilding.bind(this)
+    this.DropdownMeterList = this.DropdownMeterList.bind(this)
+    this.meterSelected = this.meterSelected.bind(this)
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
 
     if (this.props.build) {
       this.state.build = this.props.build;
@@ -22,6 +23,27 @@ export default class Building extends React.Component {
     this.state.dateStart = this.props.dateStart;
     this.state.dateEnd = this.props.dateEnd;
 
+  }
+
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+
+    if (this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
+      let self = this;
+      this.setState({dateStart : this.props.dateStart})
+      this.setState({dateEnd : this.props.dateEnd})
+      this.setState({data : ''})
+      Meteor.call("getBuildings", (error, response) => {
+        if (error) {
+          console.log('Building' + error)
+        } else {
+          console.log("res+ build ")
+          console.log(response)
+          self.setState({ data: response});
+        }
+      });
+    }
   }
 
   componentWillMount() {
@@ -72,7 +94,6 @@ export default class Building extends React.Component {
         this.setState({ meter: selection[0].key, unit: 'kW' });
       }
     }
-    console.log(this.state.dateStart);
   }
 
   meterSelected(e, name) {
@@ -102,7 +123,6 @@ export default class Building extends React.Component {
                             dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
             </Card.Group>
           </Container>
-
         </div>
     );
   }
