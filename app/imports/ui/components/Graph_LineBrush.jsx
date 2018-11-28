@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Loader, Container } from 'semantic-ui-react';
-import { VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer, VictoryAxis, VictoryBrushContainer } from 'victory';
+import { VictoryChart, VictoryLine, VictoryTheme, VictoryZoomContainer, VictoryAxis, VictoryBrushContainer} from 'victory';
 import PropTypes from 'prop-types';
 
 
@@ -108,23 +108,20 @@ return filtered;
                     fixLabelOverlap={true}
                     style={{
                       ticks: { fill: '#fff' },
-                      tickLabels: { fill: '#fff' },
+                      tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
+                      axis: {fill: '#fff'},
                     }}
                 />
                 <VictoryAxis dependentAxis
                              fixLabelOverlap={true}
                              style={{
                                ticks: { fill: '#fff' },
-                               tickLabels: { fill: '#fff' },
+                               tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat'  },
                              }}
                 />
                 <VictoryLine
                     style={{
                       data: { stroke: '#ccff00', strokeWidth: 0.5 },
-                      parent: { border: '1px solid #5E7480' },
-                      // labels: {
-                      //   fontSize: 50,
-                      // },
                     }}
                     animate={{
                       duration: 2000,
