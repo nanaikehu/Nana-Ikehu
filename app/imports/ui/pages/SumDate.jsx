@@ -8,8 +8,8 @@ class SumDate extends React.Component {
 
   constructor(props) {
     super(props);
-    this.date = new Date();
-    this.state = { picked: 30, data: '', dateEnd: new Date().toString(), dateStart: this.dateAgo(30).toString() };
+    this.date = new Date('2018/11/01');
+    this.state = { picked: 30, data: '', dateEnd: new Date('2018/11/01').toString(), dateStart: this.dateAgo(30).toString() };
     this.rangeSelected = this.rangeSelected.bind(this);
     this.dateAgo = this.dateAgo.bind(this);
 

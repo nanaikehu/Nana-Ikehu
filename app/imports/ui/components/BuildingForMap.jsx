@@ -128,8 +128,4 @@ export default class Building extends React.Component {
   }
 }
 
-Building.propTypes = {
-  dateStart: PropTypes.string.isRequired,
-  dateEnd: PropTypes.string.isRequired,
-  build: PropTypes.array.isRequired,
-};
+
