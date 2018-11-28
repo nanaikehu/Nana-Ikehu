@@ -160,6 +160,10 @@ h1, h2 {
   color:white !important;
 }
 
+.react-date-picker__calendar, .react-date-picker__calendar--open{
+  z-index: 10000000 !important;
+}
+
 /*.react-date-picker.react-date-picker--closed.react-date-picker--enabled.datePicker{*/
   /*background-color: #ECF2FF;*/
   /*color: black;*/
@@ -173,3 +177,4 @@ h1, h2 {
   overflow: auto;
   display: inline-block;
 }
+

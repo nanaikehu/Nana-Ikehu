@@ -89,7 +89,7 @@ return filtered;
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a'};
+    const divStyle = { backgroundColor: '#383b4a', padding: '0'};
     return (
         <Card style={divStyle}>
           <Card.Content>
@@ -135,34 +135,6 @@ return filtered;
                     y={this.props.y}
                 />
 
-              </VictoryChart>
-              <VictoryChart
-                  padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
-                  height={100} scale={{ x: 'time' }}
-                  containerComponent={
-                    <VictoryBrushContainer
-                        brushDimension="x"
-                        brushDomain={this.state.zoomDomain}
-                        onBrushDomainChange={this.handleZoom.bind(this)}
-                    />
-                  }
-              >
-                <VictoryAxis
-                    fixLabelOverlap={true}
-                    tickFormat={(month) => { new Date(month).getMonth(); } }
-                />
-                <VictoryLine
-                    style={{
-                      data: { stroke: '#c43a31', strokeWidth: 0.2 },
-                      parent: { border: '1px solid #5E7480' },
-                      labels: {
-                        fontSize: 50,
-                      },
-                    }}
-                    data={this.reduceBrush() }
-                    x={this.props.x}
-                    y={this.props.y}
-                />
               </VictoryChart>
           </Card.Content>
         </Card>

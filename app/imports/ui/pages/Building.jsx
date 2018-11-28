@@ -104,7 +104,7 @@ export default class Building extends React.Component {
   }
 
   renderGraph() {
-    let pad = { paddingTop: '4rem', overflow: 'hidden', minHeight: '100vh'}
+    let pad = { paddingTop: '4rem', paddingBottom: '4rem', overflow: 'hidden', minHeight: '100vh'}
     let barpad = {marginBottom : '8px'}
     // const pickerColor = { color: '#fff' }
     const pickerStyle = { textAlign: 'center', backgroundColor: '#ECF2FF', color: 'black', borderRadius: '6rem', padding: '.5rem' }
