@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Confirm, Container, Grid, Header, Loader } from 'semantic-ui-react';
+import { Button, Container, Grid, Header } from 'semantic-ui-react';
 import Map1 from '../components/Map'
 import Map2 from '../components/HeatMap'
 import Calendar from "react-calendar";
@@ -20,8 +20,7 @@ class ListMap extends React.Component {
   startChange = date => this.setState({ dateStart: date })
   open = () => this.setState({ open: true })
   close = () => this.setState({ open: false })
-  open1 = () => this.setState({ open: false })
-  close1 = () => this.setState({ open: true })
+
 
 
   componentDidUpdate(prevProps) {
@@ -58,11 +57,9 @@ class ListMap extends React.Component {
               <Header inverted>Change to Heat Map</Header>
               <p/>
               <Button onClick={this.open}>Show</Button>
-              <Confirm open={this.state.open} onCancel={this.close} onConfirm={this.close} />
-              {/*<Header inverted>Change to Marker Map</Header>*/}
-              {/*<p/>*/}
-              {/*<Button onClick={this.open1}>Show</Button>*/}
-              {/*<Confirm open={this.state.open} onCancel={this.close1} onConfirm={this.close1} />*/}
+              <Header inverted>Change to Marker Map</Header>
+              <p/>
+              <Button onClick={this.close}>Show</Button>
             </Grid.Column>
             <Grid.Column style={style}><Calendar className='datePicker' style={pickerColor}
                                                  value={this.state.dateEnd}
