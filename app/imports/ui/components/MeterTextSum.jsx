@@ -21,14 +21,14 @@ export default class MeterTextSum extends React.Component {
       Meteor.call('getMeterbyDate', this.props.meterId,
           new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
         if (error) {
-          console.log(`SimpleLine${error}`);
+          // console.log(`SimpleLine${error}`);
         } else {
-          console.log(`res + for ID ${this.state.meterId}`);
+          // console.log(`res + for ID ${this.state.meterId}`);
           if (!response.length) {
             response = [];
           }
 
-          console.log(response);
+          // console.log(response);
 
           self.setState({ data: response });
         }
@@ -42,16 +42,15 @@ export default class MeterTextSum extends React.Component {
     Meteor.call('getMeterbyDate', this.props.meterId,
         new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
       if (error) {
-        console.log(`SimpleLine${error}`);
+        // console.log(`SimpleLine${error}`);
       } else {
-        console.log(`res + for ID ${this.state.meterId}`);
-        console.log(response);
+        // console.log(`res + for ID ${this.state.meterId}`);
+        // console.log(response);
         if (!response.length) {
           response = [];
         }
 
-
-        console.log(response);
+        // console.log(response);
         self.setState({ data: response });
       }
     });
@@ -65,7 +64,10 @@ export default class MeterTextSum extends React.Component {
   renderGraph() {
     const data = this.state.data;
     const maxPoint = _.max(data, entry => entry.max);
-    const highlight = { backgroundColor: '#CCFF00', color: 'black', paddingLeft: '0.5rem', paddingRight: '0.5rem', borderRadius: '0.5rem' }
+    const highlight = {
+      backgroundColor: '#CCFF00', color: 'black',
+      paddingLeft: '0.5rem', paddingRight: '0.5rem', borderRadius: '0.5rem'
+    };
     let sumPoint = _.pluck(data, 'mean');
     sumPoint = sumPoint.reduce((total, val) => total + val);
 

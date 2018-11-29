@@ -1,9 +1,8 @@
 import React from 'react';
-import { Loader, Card, Container } from 'semantic-ui-react';
+import { Card, Container, Loader } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
 import { Meteor } from "meteor/meteor";
 import MeterTextSum from './MeterTextSum'
-import { Graph_LineBrush } from './Graph_LineBrush';
 
 export default class Building extends React.Component {
 
@@ -127,5 +126,4 @@ export default class Building extends React.Component {
     );
   }
 }
-
 

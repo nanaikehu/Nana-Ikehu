@@ -19,7 +19,7 @@ export default class LineBrushDriver extends React.Component {
       this.setState({ data: '' });
       Meteor.call('sumHourly', new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
         if (error) {
-          console.log(`SimpleLine, ${error}`);
+          // console.log(`SimpleLine, ${error}`);
         } else {
           self.setState({ data: response });
         }
@@ -32,7 +32,7 @@ export default class LineBrushDriver extends React.Component {
     const self = this;
     Meteor.call('sumHourly', new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
       if (error) {
-        console.log(`SimpleLine, ${error}`);
+        // console.log(`SimpleLine, ${error}`);
       } else {
 
         self.setState({ data: response });

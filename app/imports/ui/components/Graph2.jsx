@@ -20,8 +20,7 @@ class Graph2 extends React.Component {
   }
 
   render() {
-    const data = this.props.data;
-    console.log('graph2');
+    // console.log('graph2');
     const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
     const size = 300;
     return (

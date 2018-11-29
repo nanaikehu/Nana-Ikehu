@@ -1,7 +1,6 @@
 import React from 'react';
-import { Image, Container, Icon, Grid } from 'semantic-ui-react';
+import { Container, Grid, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {

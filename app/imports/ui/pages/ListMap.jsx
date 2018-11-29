@@ -4,10 +4,9 @@ import Map1 from '../components/Map'
 import Map2 from '../components/HeatMap'
 import Calendar from "react-calendar";
 
-
 /** A simple static component to render some text for the landing page. */
 class ListMap extends React.Component {
-    constructor(props) {
+  constructor(props) {
     super(props)
     let today = new Date('2018/11/01')
     let priorDate = new Date().setDate(today.getDate()-30)
@@ -21,7 +20,6 @@ class ListMap extends React.Component {
   open = () => this.setState({ open: true })
   close = () => this.setState({ open: false })
 
-
   componentDidUpdate(prevProps) {
     if (this.state.open !== prevProps.open) {
       if(this.state.open){
@@ -32,6 +30,7 @@ class ListMap extends React.Component {
       }
     }
   }
+
   componentWillMount() {
     if(this.state.open){
       this.state.map = <Map2 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
@@ -40,7 +39,6 @@ class ListMap extends React.Component {
       this.state.map = <Map1 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
     }
   }
-
 
   render() {
     const pickerColor = { color: '#fff' }

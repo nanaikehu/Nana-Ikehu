@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Loader } from 'semantic-ui-react';
-import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryAxis, VictoryBrushContainer } from 'victory';
+import { VictoryAxis, VictoryBrushContainer, VictoryChart, VictoryLine, VictoryZoomContainer } from 'victory';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 
@@ -27,9 +27,9 @@ export class Graph_LineBrush extends React.Component {
       Meteor.call('getMeterbyDate', this.props.meterId, new Date(this.props.dateStart),
           new Date(this.props.dateEnd), (error, response) => {
             if (error) {
-              console.log(`SimpleLine${error}`);
+              // console.log(`SimpleLine${error}`);
             } else {
-              console.log(`res + for ID ${this.state.meterId}`);
+              // console.log(`res + for ID ${this.state.meterId}`);
               if (!response.length) {
                 response = [];
               }
@@ -47,10 +47,10 @@ export class Graph_LineBrush extends React.Component {
     Meteor.call('getMeterbyDate', this.props.meterId,
         new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
           if (error) {
-            console.log(`SimpleLine${error}`);
+            // console.log(`SimpleLine${error}`);
           } else {
-            console.log(`res + for ID ${this.state.meterId}`);
-            console.log(response);
+            // console.log(`res + for ID ${this.state.meterId}`);
+            // console.log(response);
             if (!response.length) {
               response = [];
             }
@@ -76,7 +76,7 @@ export class Graph_LineBrush extends React.Component {
           (d, i) => ((i % k) === 0),
       );
     }
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
 
   }
@@ -90,7 +90,7 @@ export class Graph_LineBrush extends React.Component {
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a', padding: '0'};
+    const divStyle = { backgroundColor: '#383b4a', padding: '0' };
     return (
         <Card style={divStyle}>
           <Card.Content>
@@ -110,14 +110,14 @@ export class Graph_LineBrush extends React.Component {
                     style={{
                       ticks: { fill: '#fff' },
                       tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
-                      axis: {fill: '#fff'},
+                      axis: { fill: '#fff' },
                     }}
                 />
                 <VictoryAxis dependentAxis
                              fixLabelOverlap={true}
                              style={{
                                ticks: { fill: '#fff' },
-                               tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat'  },
+                               tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
                              }}
                 />
                 <VictoryLine

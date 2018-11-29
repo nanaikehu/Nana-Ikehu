@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Header,Dropdown, Container } from 'semantic-ui-react';
+import { Card, Container, Dropdown, Header } from 'semantic-ui-react';
 import PieDriver from '../components/PieDriver';
 import LineBrushDriver from '../components/LineBrushDriver';
 
@@ -9,14 +9,17 @@ class SumDate extends React.Component {
   constructor(props) {
     super(props);
     this.date = new Date('2018/11/01');
-    this.state = { picked: 30, data: '', dateEnd: new Date('2018/11/01').toString(), dateStart: this.dateAgo(30).toString() };
+    this.state = {
+      picked: 30, data: '', dateEnd: new Date('2018/11/01').toString(),
+      dateStart: this.dateAgo(30).toString()
+    };
     this.rangeSelected = this.rangeSelected.bind(this);
     this.dateAgo = this.dateAgo.bind(this);
 
   }
 
   rangeSelected(e, name) {
-    console.log(this.state);
+    // console.log(this.state);
     let x = name.value;
     if (x === 999) {
       x = new Date(0);
@@ -27,7 +30,7 @@ class SumDate extends React.Component {
   }
 
   dateAgo(days) {
-    console.log(this.date);
+    // console.log(this.date);
     return (this.date) ? new Date(new Date().setDate(new Date([this.date]).getDate() - days)) : '';
   }
 
@@ -42,7 +45,7 @@ class SumDate extends React.Component {
     ];
 
     return (
-        <div style={{ paddingBottom: '4rem', paddingTop: '4rem'}}>
+        <div style={{ paddingBottom: '4rem', paddingTop: '4rem' }}>
 
           <Header inverted textAlign={'center'} as='h2' style={{ fontFamily: 'Montserrat' }}>Energy Dashboard</Header>
           <Container centered style={{ width: '25%', paddingBottom: '2rem' }}>
