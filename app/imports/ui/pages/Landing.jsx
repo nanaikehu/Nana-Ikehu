@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, Container, Icon, Grid } from 'semantic-ui-react';
+import { Container, Grid, Icon, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -20,7 +21,7 @@ class Landing extends React.Component {
               <h1>Nānā Ikehu</h1>
               <h2>Visualize Energy</h2>
               <div>
-                <a href='Building.jsx#/building'>View Project</a>
+                <Link to='/building' activeClassName="active">View Project</Link>
               </div>
             </div>
           </Container>

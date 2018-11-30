@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Loader, Card, Grid, Container } from 'semantic-ui-react';
+import { Card, Container, Dropdown, Grid, Loader } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 import DatePicker from 'react-date-picker';
@@ -32,7 +32,7 @@ export default class Building extends React.Component {
 
   endChange = date => {
     this.setState({ dateEnd: date });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   startChange = date => this.setState({ dateStart: date });
@@ -41,10 +41,10 @@ export default class Building extends React.Component {
     const self = this;
     Meteor.call('getBuildings', (error, response) => {
       if (error) {
-        console.log(`Building${error}`);
+        // console.log(`Building${error}`);
       } else {
-        console.log('res+ build ');
-        console.log(response);
+        // console.log('res+ build ');
+        // console.log(response);
 
         self.setState({ data: response });
 
@@ -71,7 +71,7 @@ export default class Building extends React.Component {
 // eslint-disable-next-line consistent-return
   DropdownMeterList() {
     if (this.state.build) {
-      console.log(this.state.data);
+      // console.log(this.state.data);
       const selected = _.findWhere(this.state.data, { code: this.state.build });
 
       const selection = [];
@@ -104,11 +104,11 @@ export default class Building extends React.Component {
 
   onBuilding(e, name) {
     this.setState({ build: name.value });
-    console.log(`build ID: ${name.value}`);
+    // console.log(`build ID: ${name.value}`);
   }
 
   renderGraph() {
-    const pad = { marginTop: '4em' };
+    const pad = { paddingTop: '4rem', paddingBottom: '4rem', overflow: 'hidden', minHeight: '100vh' };
     const barpad = { marginBottom: '8px' };
     // const pickerColor = { color: '#fff' }
     const pickerStyle = {
@@ -156,7 +156,7 @@ export default class Building extends React.Component {
               </Grid.Row>
             </Grid.Column>
           </Grid>
-          <Container height={'80%'}>
+          <Container style={{ height: '100%' }}>
             <Card.Group itemsPerRow={1}>
               {(this.state.meter) &&
               <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()}

@@ -19,10 +19,10 @@ export default class PieDriver extends React.Component {
       this.setState({ data: '' });
       Meteor.call('sumByDate', new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
         if (error) {
-          console.log(`SimpleLine${error}`);
+          // console.log(`SimpleLine${error}`);
         } else {
-          console.log(`res + for ID ${this.state.meterId}`);
-          console.log(response);
+          // console.log(`res + for ID ${this.state.meterId}`);
+          // console.log(response);
 
           self.setState({ data: response });
         }
@@ -35,10 +35,10 @@ export default class PieDriver extends React.Component {
     const self = this;
     Meteor.call('sumByDate', new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
       if (error) {
-        console.log(`SimpleLine${error}`);
+        // console.log(`SimpleLine${error}`);
       } else {
 
-        console.log(response);
+        // console.log(response);
         self.setState({ data: response });
       }
     });
@@ -50,7 +50,7 @@ export default class PieDriver extends React.Component {
 
 
   renderGraph() {
-    console.log(this.state.data);
+    // console.log(this.state.data);
     return (
         <Card fluid>
           <Card.Content>

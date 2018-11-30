@@ -26,7 +26,7 @@ class Upload extends React.Component {
   }
 
   readSingleFile(e) {
-    console.log(sample.find().fetch());
+    // console.log(sample.find().fetch());
     const file = e.target.files[0];
     if (!file) {
       return;
@@ -55,7 +55,7 @@ class Upload extends React.Component {
             <input type="file" id="file-input" onChange={this.readSingleFile}/>
           </Grid.Row>
           <Grid.Row>
-            <pre id="file-content">{console.log(sample.find().fetch())}</pre>
+            <pre id="file-content">// console.log(sample.find().fetch())}</pre>
           </Grid.Row>
         </Grid>
     );

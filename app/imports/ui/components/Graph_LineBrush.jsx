@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Loader } from 'semantic-ui-react';
-import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryAxis, VictoryBrushContainer } from 'victory';
+import { VictoryAxis, VictoryBrushContainer, VictoryChart, VictoryLine, VictoryZoomContainer } from 'victory';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 
@@ -27,9 +27,9 @@ export class Graph_LineBrush extends React.Component {
       Meteor.call('getMeterbyDate', this.props.meterId, new Date(this.props.dateStart),
           new Date(this.props.dateEnd), (error, response) => {
             if (error) {
-              console.log(`SimpleLine${error}`);
+              // console.log(`SimpleLine${error}`);
             } else {
-              console.log(`res + for ID ${this.state.meterId}`);
+              // console.log(`res + for ID ${this.state.meterId}`);
               if (!response.length) {
                 response = [];
               }
@@ -47,10 +47,10 @@ export class Graph_LineBrush extends React.Component {
     Meteor.call('getMeterbyDate', this.props.meterId,
         new Date(this.props.dateStart), new Date(this.props.dateEnd), (error, response) => {
           if (error) {
-            console.log(`SimpleLine${error}`);
+            // console.log(`SimpleLine${error}`);
           } else {
-            console.log(`res + for ID ${this.state.meterId}`);
-            console.log(response);
+            // console.log(`res + for ID ${this.state.meterId}`);
+            // console.log(response);
             if (!response.length) {
               response = [];
             }
@@ -76,7 +76,7 @@ export class Graph_LineBrush extends React.Component {
           (d, i) => ((i % k) === 0),
       );
     }
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
 
   }
@@ -90,41 +90,39 @@ export class Graph_LineBrush extends React.Component {
   }
 
   renderGraph() {
-    const divStyle = { backgroundColor: '#383b4a', display: 'inline-block' };
+    const divStyle = { backgroundColor: '#383b4a', padding: '0' };
     return (
-        <Card style={divStyle} fluid>
+        <Card style={divStyle}>
           <Card.Content>
-            <div>
-              <VictoryChart height={250} scale={{ x: 'time' }}
-                            containerComponent={
-                              <VictoryZoomContainer
-                                  zoomDimension="x"
-                                  zoomDomain={this.state.zoomDomain}
-                                  onZoomDomainChange={this.handleZoom.bind(this)}
-                              />
-                            }
+              <VictoryChart
+                  height={250}
+                  scale={{ x: 'time' }}
+                  containerComponent={
+                    <VictoryZoomContainer
+                        zoomDimension="x"
+                        zoomDomain={this.state.zoomDomain}
+                        onZoomDomainChange={this.handleZoom.bind(this)}
+                    />
+                  }
               >
                 <VictoryAxis
                     fixLabelOverlap={true}
                     style={{
                       ticks: { fill: '#fff' },
-                      tickLabels: { fill: '#fff' },
+                      tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
+                      axis: { fill: '#fff' },
                     }}
                 />
                 <VictoryAxis dependentAxis
                              fixLabelOverlap={true}
                              style={{
                                ticks: { fill: '#fff' },
-                               tickLabels: { fill: '#fff' },
+                               tickLabels: { fill: '#fff', fontSize: 10, fontFamily: 'Montserrat' },
                              }}
                 />
                 <VictoryLine
                     style={{
                       data: { stroke: '#ccff00', strokeWidth: 0.5 },
-                      parent: { border: '1px solid #5E7480' },
-                      // labels: {
-                      //   fontSize: 50,
-                      // },
                     }}
                     animate={{
                       duration: 2000,
@@ -166,7 +164,6 @@ export class Graph_LineBrush extends React.Component {
                     y={this.props.y}
                 />
               </VictoryChart>
-            </div>
           </Card.Content>
         </Card>
     );
