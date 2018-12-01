@@ -137,11 +137,10 @@ h1, h2 {
 .ui.selection.dropdown .menu > .item{
   /*color: #fff;*/
   background-color: #383b4a;
-  border-top: none !important;
 }
 
 .ui.selection.dropdown .menu > .item:hover{
-  background-color: #A5ABBD;
+  background-color: #0c121f;
 }
 
 /*.datePicker{*/
