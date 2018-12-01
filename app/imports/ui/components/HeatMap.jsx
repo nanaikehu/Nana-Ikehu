@@ -66,14 +66,19 @@ export default class Map2 extends Component {
     // console.log(dataValue)
     return (
 
-        <Map center={position} zoom={17} minZoom={'17'} style={{ height: '600px' }}>
+        <Map center={position} zoom={17} minZoom={'15'} style={{ height: '600px' }}>
           <HeatmapLayer
               fitBoundsOnLoad
               fitBoundsOnUpdate
               points={addressPoints}
               longitudeExtractor={m => m[1]}
               latitudeExtractor={m => m[0]}
-              intensityExtractor={m => parseFloat(m[2])} />
+              intensityExtractor={m => parseFloat(m[2])}
+              gradient={{ 0.0: 'green', 0.4: 'blue', 0.8: 'orange', 1.0: 'red' }}
+              minOpacity={0.7}
+              radius={60}
+
+          />
             <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
@@ -81,7 +86,7 @@ export default class Map2 extends Component {
 
           </Map>
 
-          
+
 
     );
   }
