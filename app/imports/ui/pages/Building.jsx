@@ -1,11 +1,13 @@
 import React from 'react';
-import { Card, Container, Dropdown, Grid, Loader } from 'semantic-ui-react';
+import { Button, Card, Container, Dropdown, Grid, Icon, Loader, Segment, Menu, Sidebar } from 'semantic-ui-react';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 import DatePicker from 'react-date-picker';
 import PropTypes from 'prop-types';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
+// import { SideBarMenu } from '../components/SideBarMenu';
 import MeterTextSum from '../components/MeterTextSum';
+import { Link } from 'react-router-dom';
 
 export default class Building extends React.Component {
 
@@ -16,13 +18,17 @@ export default class Building extends React.Component {
 // eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
     const maxDate = new Date(2018, 9, 1);
-    this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
+    this.state = { visible: false, data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this);
     this.DropdownMeterList = this.DropdownMeterList.bind(this);
     this.meterSelected = this.meterSelected.bind(this);
     this.endChange = this.endChange.bind(this);
     this.startChange = this.startChange.bind(this);
+    this.handleHideClick = () => this.setState({ visible: false })
+    this.handleShowClick = () => this.setState({ visible: true })
+    this.handleSidebarHide = () => this.setState({ visible: false })
+
 
     if (this.props.match.params.code) {
       this.state.build = this.props.match.params.code;
@@ -118,54 +124,88 @@ export default class Building extends React.Component {
       borderRadius: '6rem',
       padding: '.5rem',
     };
+
+    const { visible } = this.state
+
     return (
-        <div style={pad}>
-          <Grid columns={2} centered>
-            <Grid.Row>
-              <Grid.Column style={pickerStyle}>
-                <div style={{ display: 'inline-block', marginRight: '2rem' }}>
-                  <span>Start Date: </span>
-                  <DatePicker
-                      className='datePicker'
-                      style={{ border: 'none' }}
-                      name="dateStart"
-                      placeholder="Start"
-                      value={this.state.dateStart}
-                      onChange={this.startChange}
-                  />
-                </div>
-                <div style={{ display: 'inline-block', marginLeft: '2rem' }}>
-                  <span>End Date: </span>
-                  <DatePicker
-                      className='datePicker'
-                      name="dateEnd"
-                      placeholder="End"
-                      value={this.state.dateEnd}
-                      onChange={this.endChange}
-                  />
-                </div>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Column style={barpad}>
-              <Grid.Row>
-                <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
-                          onChange={this.onBuilding} value={this.state.build}/>
-              </Grid.Row>
-              <Grid.Row>
-                {(this.state.build) ? this.DropdownMeterList() : ''}
-              </Grid.Row>
-            </Grid.Column>
-          </Grid>
-          <Container style={{ height: '100%' }}>
-            <Card.Group itemsPerRow={1}>
-              {(this.state.meter) &&
-              <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()}
-                            dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
-              {(this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'}
-                                                      dateStart={this.state.dateStart.toString()}
-                                                      dateEnd={this.state.dateEnd.toString()}/>}
-            </Card.Group>
-          </Container>
+        <div>
+          <Button disabled={visible} onClick={this.handleShowClick}>
+            <Icon name='sidebar'></Icon>
+          </Button>
+
+          <Sidebar.Pushable>
+            <Sidebar
+                as={Menu}
+                animation='overlay'
+                icon='labeled'
+                inverted
+                onHide={this.handleSidebarHide}
+                vertical
+                visible={visible}
+                width='thin'
+            >
+              <Menu.Item as='a'>
+                <Icon name='home' />
+                <Link to='/' activeClassName="active">Home</Link>
+              </Menu.Item>
+              <Menu.Item as='a'>
+                <Icon name='building outline' />
+                <Link to='/building' activeClassName="active">Building</Link>
+              </Menu.Item>
+              <Menu.Item as='a'>
+                <Icon name='map outline' />
+                <Link to='/map' activeClassName="active">Map</Link>
+              </Menu.Item>
+            </Sidebar>
+              <div style={pad}>
+                <Grid columns={2} centered>
+                  <Grid.Row>
+                    <Grid.Column style={pickerStyle}>
+                      <div style={{ display: 'inline-block', marginRight: '2rem' }}>
+                        <span>Start Date: </span>
+                        <DatePicker
+                            className='datePicker'
+                            style={{ border: 'none' }}
+                            name="dateStart"
+                            placeholder="Start"
+                            value={this.state.dateStart}
+                            onChange={this.startChange}
+                        />
+                      </div>
+                      <div style={{ display: 'inline-block', marginLeft: '2rem' }}>
+                        <span>End Date: </span>
+                        <DatePicker
+                            className='datePicker'
+                            name="dateEnd"
+                            placeholder="End"
+                            value={this.state.dateEnd}
+                            onChange={this.endChange}
+                        />
+                      </div>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Column style={barpad}>
+                    <Grid.Row>
+                      <Dropdown placeholder='Select Building' fluid search selection options={this.DropdownList()}
+                                onChange={this.onBuilding} value={this.state.build}/>
+                    </Grid.Row>
+                    <Grid.Row>
+                      {(this.state.build) ? this.DropdownMeterList() : ''}
+                    </Grid.Row>
+                  </Grid.Column>
+                </Grid>
+                <Container style={{ height: '100%' }}>
+                  <Card.Group itemsPerRow={1}>
+                    {(this.state.meter) &&
+                    <MeterTextSum meterId={this.state.meter} dateStart={this.state.dateStart.toString()}
+                                  dateEnd={this.state.dateEnd.toString()} unit={this.state.unit}/>}
+                    {(this.state.meter) && <Graph_LineBrush meterId={this.state.meter} x={'time'} y={'mean'}
+                                                            dateStart={this.state.dateStart.toString()}
+                                                            dateEnd={this.state.dateEnd.toString()}/>}
+                  </Card.Group>
+                </Container>
+              </div>
+          </Sidebar.Pushable>
         </div>
     );
   }
