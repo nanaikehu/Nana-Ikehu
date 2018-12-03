@@ -143,6 +143,10 @@ h1, h2 {
   background-color: #0c121f;
 }
 
+.ui.dropdown.selected, .ui.dropdown .menu .selected > .item {
+  background: #0c121f;
+}
+
 /*.datePicker{*/
   /*border-bottom: thin solid black;*/
 /*}*/
