@@ -22,7 +22,6 @@ export default class Map2 extends Component {
 
   render() {
     const position = [21.299677843574493, -157.81743038445714];
-
     return (
 
         <Map center={position} zoom={17} minZoom={'15'} style={{ height: '600px' }}>
