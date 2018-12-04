@@ -10,7 +10,7 @@ class ListMap extends React.Component {
     super(props)
     let today = new Date('2018/11/01')
     let priorDate = new Date('2018/10/01')
-    this.state = {map: {}, open: false, dateStart: new Date(priorDate), dateEnd: new Date(today)};
+    this.state = {map: {}, open: false, dateStart: new Date(priorDate), dateEnd: new Date(today), calendar1: {}, calendar2: {}};
     this.endChange = this.endChange.bind(this)
     this.startChange = this.startChange.bind(this)
 
@@ -23,34 +23,47 @@ class ListMap extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.state.open !== prevProps.open) {
       if(this.state.open){
-        this.state.map = <Map2 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
+        this.state.map = <Map2/>;
+        this.state.calendar1 = <div/>;
+        this.state.calendar2 = <div/>;
       }
       else{
         this.state.map = <Map1 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
+        this.state.calendar1 = <Calendar style={{border: 'none'}} className='datePicker'
+                                         value={this.state.dateStart}
+                                         onChange={this.startChange} />;
+        this.state.calendar2 = <Calendar className='datePicker'
+                                         value={this.state.dateEnd}
+                                         onChange={this.endChange} />;
       }
     }
   }
 
   componentWillMount() {
     if(this.state.open){
-      this.state.map = <Map2 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
+      this.state.map = <Map2/>;
+      this.state.calendar1 = <div/>;
+      this.state.calendar2 = <div/>;
     }
     else{
       this.state.map = <Map1 dateStart={this.state.dateStart.toString()} dateEnd={this.state.dateEnd.toString()}/>;
+      this.state.calendar1 = <Calendar style={{border: 'none'}} className='datePicker'
+                                       value={this.state.dateStart}
+                                       onChange={this.startChange} />;
+      this.state.calendar2 = <Calendar className='datePicker'
+                                       value={this.state.dateEnd}
+                                       onChange={this.endChange} />;
     }
   }
 
   render() {
-    const pickerColor = { color: '#fff' }
     const style = { textAlign: 'center' }
     const pad = {marginTop : '4em'}
 
     return (
         <Grid columns={2} centered>
           <Grid.Row style={pad} columns={3}>
-            <Grid.Column style={style}><Calendar style={{border: 'none'}} className='datePicker'
-                                                 value={this.state.dateStart}
-                                                 onChange={this.startChange} /></Grid.Column>
+            <Grid.Column style={style}>{this.state.calendar1}</Grid.Column>
             <Grid.Column style={style}>
               <Header inverted>Change to Heat Map</Header>
               <p/>
@@ -59,9 +72,7 @@ class ListMap extends React.Component {
               <p/>
               <Button onClick={this.close}>Show</Button>
             </Grid.Column>
-            <Grid.Column style={style}><Calendar className='datePicker' style={pickerColor}
-                                                 value={this.state.dateEnd}
-                                                 onChange={this.endChange} /></Grid.Column>
+            <Grid.Column style={style}>{this.state.calendar2}></Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Container>
