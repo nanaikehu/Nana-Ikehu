@@ -8,9 +8,9 @@ class SumDate extends React.Component {
 
   constructor(props) {
     super(props);
-    this.date = new Date('2018/11/01');
+    this.date = new Date('2018/10/26');
     this.state = {
-      picked: 30, data: '', dateEnd: new Date('2018/11/01').toString(),
+      picked: 30, data: '', dateEnd: new Date(this.date).toString(),
       dateStart: this.dateAgo(30).toString()
     };
     this.rangeSelected = this.rangeSelected.bind(this);
@@ -25,13 +25,13 @@ class SumDate extends React.Component {
       x = new Date(0);
     } else {
       x = this.dateAgo(x);
+      console.log(x)
       this.setState({ dateStart: x.toString(), picked: name.value });
     }
   }
 
   dateAgo(days) {
-    // console.log(this.date);
-    return (this.date) ? new Date(new Date().setDate(new Date([this.date]).getDate() - days)) : '';
+      return (this.date) ? new Date(new Date(this.date).setDate(new Date([this.date]).getDate() - days)) : '';
   }
 
   render() {
@@ -43,6 +43,8 @@ class SumDate extends React.Component {
       { text: '90 Days', value: 90, key: 4 },
       { text: 'All Time', value: 999, key: 5 },
     ];
+    console.log(this.state.dateStart)
+    console.log(this.state.dateEnd)
 
     return (
         <div style={{ paddingBottom: '4rem', paddingTop: '4rem' }}>

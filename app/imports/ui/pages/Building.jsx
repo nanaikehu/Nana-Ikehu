@@ -11,11 +11,11 @@ export default class Building extends React.Component {
 
   constructor(props) {
     super(props);
-    const today = new Date(2018, 9, 31);
+    const today = new Date('2018/10/26');
     /* exported priorDate */
 // eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
-    const maxDate = new Date(2018, 9, 1);
+    const maxDate = new Date('2018/09/26');
     this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this);
