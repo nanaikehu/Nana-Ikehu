@@ -71,15 +71,15 @@ export default class Building extends React.Component {
 // eslint-disable-next-line consistent-return
   DropdownMeterList() {
     if (this.state.build) {
-      // console.log(this.state.data);
-      const selected = _.findWhere(this.state.data, { code: this.state.build });
+      console.log(this.state.data)
+      let selected = _.findWhere(this.state.data, { code: this.state.build });
 
-      const selection = [];
+      let selection = [];
       _.forEach(selected.meters, build => {
-        const x = {
+        let x = {
           key: build.id,
-          value: `${build.id}${build.unit}${build.name}`,
-          text: `${build.unit}${build.name}`,
+          value: `${build.id} ${build.unit} ${build.name}`,
+          text: `${build.unit} ${build.name}`,
         };
         selection.push(x);
       });
@@ -94,9 +94,11 @@ export default class Building extends React.Component {
   }
 
   meterSelected(e, name) {
-    const x = name.value.split('');
-    this.setState({ meter: parseInt(x[0], 10), unit: x[1] });
-  }
+    let x = name.value.split(" ")
+    this.setState({ meter: parseInt(x[0]), unit: x[1]});
+ }
+
+
 
   render() {
     return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
