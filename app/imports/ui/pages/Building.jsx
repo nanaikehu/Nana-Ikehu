@@ -11,11 +11,11 @@ export default class Building extends React.Component {
 
   constructor(props) {
     super(props);
-    const today = new Date(2018, 9, 31);
+    const today = new Date('2018/10/26');
     /* exported priorDate */
 // eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
-    const maxDate = new Date(2018, 9, 1);
+    const maxDate = new Date('2018/09/26');
     this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this);
@@ -71,15 +71,15 @@ export default class Building extends React.Component {
 // eslint-disable-next-line consistent-return
   DropdownMeterList() {
     if (this.state.build) {
-      // console.log(this.state.data);
-      const selected = _.findWhere(this.state.data, { code: this.state.build });
+      console.log(this.state.data)
+      let selected = _.findWhere(this.state.data, { code: this.state.build });
 
-      const selection = [];
+      let selection = [];
       _.forEach(selected.meters, build => {
-        const x = {
+        let x = {
           key: build.id,
-          value: `${build.id}${build.unit}${build.name}`,
-          text: `${build.unit}${build.name}`,
+          value: `${build.id} ${build.unit} ${build.name}`,
+          text: `${build.unit} ${build.name}`,
         };
         selection.push(x);
       });
@@ -94,9 +94,11 @@ export default class Building extends React.Component {
   }
 
   meterSelected(e, name) {
-    const x = name.value.split('');
-    this.setState({ meter: parseInt(x[0], 10), unit: x[1] });
-  }
+    let x = name.value.split(" ")
+    this.setState({ meter: parseInt(x[0]), unit: x[1]});
+ }
+
+
 
   render() {
     return (this.state.data) ? this.renderGraph() : <Loader active>Getting data</Loader>;
