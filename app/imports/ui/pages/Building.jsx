@@ -16,7 +16,7 @@ export default class Building extends React.Component {
 // eslint-disable-next-line no-unused-vars
     const priorDate = new Date().setDate(today.getDate() - 30);
     const maxDate = new Date('2018/09/26');
-    this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '' };
+    this.state = { data: '', dateStart: new Date(maxDate), dateEnd: today, meter: '', build: '1019' };
     this.DropdownList = this.DropdownList.bind(this);
     this.onBuilding = this.onBuilding.bind(this);
     this.DropdownMeterList = this.DropdownMeterList.bind(this);
@@ -37,6 +37,14 @@ export default class Building extends React.Component {
 
   startChange = date => this.setState({ dateStart: date });
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+
+
+    if(this.props.build !== prevProps.build){
+      this.setState({data : '', meter : ''})
+    }
+  }
   componentWillMount() {
     const self = this;
     Meteor.call('getBuildings', (error, response) => {
@@ -105,8 +113,8 @@ export default class Building extends React.Component {
   }
 
   onBuilding(e, name) {
-    this.setState({ build: name.value });
-    // console.log(`build ID: ${name.value}`);
+    this.setState({ build: name.value ,meter: '' });
+     console.log(`build ID: ${name.value}`);
   }
 
   renderGraph() {
