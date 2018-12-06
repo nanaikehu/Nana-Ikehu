@@ -6,7 +6,6 @@ import DatePicker from 'react-date-picker';
 import PropTypes from 'prop-types';
 import { Graph_LineBrush } from '../components/Graph_LineBrush';
 import MeterTextSum from '../components/MeterTextSum';
-import { withTracker } from 'meteor/react-meteor-data';
 import { Buildings } from '/imports/api/building_db/index';
 
 export class Building extends React.Component {
@@ -175,15 +174,6 @@ export class Building extends React.Component {
   }
 
 }
-
-export default withTracker(() => {
-
-  const subBuilding = Meteor.subscribe('Buildings')
-  return {
-    data: Buildings.find({}).fetch(),
-    ready: subBuilding.ready(),
-  };
-})(Building)
 
 Building.propTypes = {
   match: PropTypes.shape,
