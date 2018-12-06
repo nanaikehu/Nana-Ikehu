@@ -4,6 +4,7 @@ import { Mongo } from 'meteor/mongo';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 
+
 export const Buildings = new Mongo.Collection('Buildings');
 export const kwData = new Mongo.Collection('kwData');
 
@@ -62,7 +63,7 @@ if (Meteor.isServer) {
   empty.map(noMeter => Buildings.remove({ _id: noMeter._id }));
 
 
-  Meteor.publish('building', function () {
+  Meteor.publish('Buildings', function () {
     return Buildings.find({});
   });
 

@@ -3,6 +3,9 @@ import { Card, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+// import { kwData } from '/imports/api/building_db/index';
+import { Building } from '../pages/Building';
 
 export default class MeterTextSum extends React.Component {
   constructor(props) {
