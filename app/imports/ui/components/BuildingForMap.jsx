@@ -33,6 +33,7 @@ export default class Building extends React.Component {
       this.setState({dateStart : this.props.dateStart})
       this.setState({dateEnd : this.props.dateEnd})
       this.setState({data : ''})
+
       Meteor.call("getBuildings", (error, response) => {
         if (error) {
           console.log('Building' + error)
