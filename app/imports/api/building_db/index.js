@@ -85,11 +85,6 @@ if (Meteor.isServer) {
       if (parseFloat(item.Mean) !== 0) {
         insertArraykW.push(data_insert);
       }
-      if (insertArraykW.length === 10000) {
-        kwData.batchInsert(insertArray);
-        insertArray.length = 0;
-      }
-
     });
     kwData.batchInsert(insertArraykW);
     kwData._ensureIndex({ meterId: 1, time: 1 });
