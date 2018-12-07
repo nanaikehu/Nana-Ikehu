@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import defaultBuilding from '../../api/building_db/buildingCoor';
 import BuildingForMap from './BuildingForMap';
+import { Meteor } from "meteor/meteor";
 
 export default class Map1 extends Component {
   constructor(props) {
@@ -12,6 +13,15 @@ export default class Map1 extends Component {
     this.state = { data: '', marker: this.props.marker, dateStart: '', dateEnd: '', meter: '' };
     this.state.dateStart = this.props.dateStart;
     this.state.dateEnd = this.props.dateEnd;
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+
+    if (this.props.dateStart !== prevProps.dateStart || this.props.dateEnd !== prevProps.dateEnd ) {
+      this.setState({dateStart : this.props.dateStart})
+      this.setState({dateEnd : this.props.dateEnd})
+    }
   }
 
   render() {
